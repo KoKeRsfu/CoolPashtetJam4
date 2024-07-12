@@ -24,7 +24,7 @@ public class CameraController : MonoBehaviour
     
 	public void MoveToOptions() 
 	{
-		transform.position = new Vector2(-18,0);
+		transform.position = new Vector2(-75,0);
 	}
 	
 	public void MoveToMenu() 
