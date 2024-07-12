@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
@@ -10,10 +11,14 @@ public class MenuController : MonoBehaviour
 	
 	[SerializeField] CameraController camController;
 	
+	[SerializeField] Slider MusicSlider;
+	[SerializeField] Slider SoundSlider;
+	
     // Start is called before the first frame update
     void Start()
     {
-        
+	    ChangeMusicVolume(PlayerPrefs.GetFloat("MusicVolume", 0.5f));
+	    PlayerPrefs.GetFloat("SoundVolume", 0.5f);
     }
 
     // Update is called once per frame
@@ -30,6 +35,12 @@ public class MenuController : MonoBehaviour
 		a.track = clickSound;
 	}
 	*/
+	
+	public void ChangeMusicVolume(float a) 
+	{
+		PlayerPrefs.SetFloat("MusicVolume", a);
+		MusicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
+	}
 	
 	public void PlayButton()
 	{
