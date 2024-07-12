@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-
 	[SerializeField] float speed = 2;
 	[SerializeField] float maxSpeed = 5;
 	[SerializeField] float jumpPower = 5;
@@ -23,6 +22,9 @@ public class PlayerController : MonoBehaviour
 	public float holdTime = 0;
 	public float holdTimeMax;
 	
+	public bool stop = false;
+	public Vector2 conservedVelocity;
+	
 	void Start()
 	{
 		rb = this.GetComponent<Rigidbody2D>();
@@ -32,6 +34,19 @@ public class PlayerController : MonoBehaviour
 
 	void Update()
 	{
+		/*
+		if (Input.GetKeyDown(KeyCode.H)) 
+		{
+			Stop();
+		}
+		if (Input.GetKeyDown(KeyCode.J)) 
+		{
+			Resume();
+		}*/
+		
+		
+		if (stop) return;
+		
 		if (coyoteTime > 0) coyoteTime -= 1 * Time.deltaTime;
 		
 		horizontal = Input.GetAxisRaw("Horizontal");
@@ -65,6 +80,8 @@ public class PlayerController : MonoBehaviour
 
 	private void FixedUpdate()
 	{
+		if (stop) return;
+		
 		if (horizontal > 0) 
 		{
 			sprite.flipX = false;
@@ -90,4 +107,21 @@ public class PlayerController : MonoBehaviour
 		
 		rb.velocity = new Vector2(rb.velocity.x + horizontal * speed, rb.velocity.y);
 	}
+	
+	public void Stop() 
+	{	
+		conservedVelocity = new Vector2(rb.velocity.x * 5f, rb.velocity.y * 1f);
+		rb.bodyType = RigidbodyType2D.Static;
+		collider.enabled = false;
+		stop = true;
+	}
+	
+	public void Resume() 
+	{
+		rb.bodyType = RigidbodyType2D.Dynamic;
+		collider.enabled = true;
+		stop = false;
+		rb.velocity = conservedVelocity;
+	}
+	
 }
