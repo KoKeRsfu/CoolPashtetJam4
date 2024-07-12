@@ -22,13 +22,8 @@ public class CameraController : MonoBehaviour
 		//Debug.Log(Vector2.Distance(this.transform.position, new Vector2()));
 	}
     
-	public void MoveToOptions() 
+	public void Move(float x, float y) 
 	{
-		transform.position = new Vector2(-75,0);
-	}
-	
-	public void MoveToMenu() 
-	{
-		transform.position = new Vector2(0, 0);
+		transform.position = new Vector2(x,y);
 	}
 }

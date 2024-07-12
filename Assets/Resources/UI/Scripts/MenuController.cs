@@ -48,15 +48,20 @@ public class MenuController : MonoBehaviour
 		//ClickSound();
 	}
 	
-	public void OptionsButton() 
+	public void MoveButton(int a) 
 	{
-		camController.MoveToOptions();
-		//ClickSound();
-	}
-	
-	public void MenuButton() 
-	{
-		camController.MoveToMenu();
+		switch (a) //0 - главное меню, 1 - настройки, 2 - уровни
+		{
+		case 0:
+			camController.Move(0,0);
+			break;
+		case 1:
+			camController.Move(-75,0);
+			break;
+		case 2:
+			camController.Move(75,0);
+			break;
+		}
 		//ClickSound();
 	}
 	
