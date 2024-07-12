@@ -22,8 +22,14 @@ public class PlayerController : MonoBehaviour
 	public float holdTime = 0;
 	public float holdTimeMax;
 	
+	public float airTime = 0;
+	public float airTimeMax;
+	
 	public bool stop = false;
 	public Vector2 conservedVelocity;
+	public float conservedGravity;
+	
+	public RaycastHit2D hit;
 	
 	void Start()
 	{
@@ -49,10 +55,14 @@ public class PlayerController : MonoBehaviour
 		
 		if (coyoteTime > 0) coyoteTime -= 1 * Time.deltaTime;
 		
+		if (airTime > 0 && airTimeMax > 0) airTime -= 0.1f * Time.deltaTime;
+		
+		if (airTimeMax == 0) airTime = 1;
+		
 		horizontal = Input.GetAxisRaw("Horizontal");
 
 		int layerMask = 1 << 6;
-		RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up, ((collider.size.y / 2) + collider.offset.y/2 + 0.2f), layerMask);
+		hit = Physics2D.Raycast(transform.position, -Vector2.up, ((collider.size.y / 2) + collider.offset.y/2 + 0.2f), layerMask);
 		
 		if (hit.collider != null) 
 		{
@@ -111,7 +121,9 @@ public class PlayerController : MonoBehaviour
 	public void Stop() 
 	{	
 		conservedVelocity = new Vector2(rb.velocity.x * 5f, rb.velocity.y * 1f);
-		rb.bodyType = RigidbodyType2D.Static;
+		conservedGravity = rb.gravityScale;
+		rb.gravityScale = 0;
+		rb.velocity = Vector2.zero;
 		collider.enabled = false;
 		stop = true;
 	}
@@ -122,6 +134,7 @@ public class PlayerController : MonoBehaviour
 		collider.enabled = true;
 		stop = false;
 		rb.velocity = conservedVelocity;
+		rb.gravityScale = conservedGravity;
 	}
 	
 }
