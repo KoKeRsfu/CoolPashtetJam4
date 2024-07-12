@@ -7,13 +7,14 @@ public class FrameManager : MonoBehaviour
 {
     public GameObject[] frames;
     public float size = 3.5f * 3f;
-    public float duration = 0.7f;
+    public float duration = 0.5f;
     public GameObject player;
     private bool unlocked = true;
     private GameObject new_frame = null;
     private float new_frame_start = 0f;
     private float rotateTo = 0f;
-    float elapsedTime = 0f;
+    private float elapsedTime = 0f;
+    private bool broke = false;
 
     void Start()
     {
@@ -44,6 +45,7 @@ public class FrameManager : MonoBehaviour
                 }
                 elapsedTime = 0f;
                 player.GetComponent<PlayerController>().Stop();
+                broke = false;
             }
         }
         else 
@@ -59,13 +61,33 @@ public class FrameManager : MonoBehaviour
             t = -3f * t * (t - 1) + 1.5f;
             player.transform.GetChild(0).transform.localScale = new Vector3(t, t, t);
 
+            if (!broke)
+                if (frames[1].transform.GetChild(0).GetComponent<BoxCollider2D>().bounds.max.y < 
+                    player.transform.position.y + 0.95 || 
+                    frames[1].transform.GetChild(0).GetComponent<BoxCollider2D>().bounds.min.y >
+                    player.transform.position.y - 1.05)
+                {
+                    if (rotateTo > 0)
+                    {
+                        this.transform.GetChild(0).transform.position = new Vector3(0f, -1f, 0f) + player.transform.position;
+                        this.transform.GetChild(0).transform.rotation = Quaternion.Euler(90f, 0f, 0f);
+                    }
+                    else 
+                    {
+                        this.transform.GetChild(0).transform.position = new Vector3(0f, .8f, 0f) + player.transform.position;
+                        this.transform.GetChild(0).transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
+                    }
+                    this.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
+                    broke = true;
+                }
+
             elapsedTime += Time.deltaTime;
 
             if (elapsedTime >= duration)
             {
+                Destroy(new_frame);
                 if (rotateTo > 0)
                 {
-                    Destroy(new_frame);
                     new_frame = frames[0];
                     frames[0] = frames[1];
                     frames[1] = frames[2];
@@ -73,7 +95,6 @@ public class FrameManager : MonoBehaviour
                 }
                 else
                 {
-                    Destroy(new_frame);
                     new_frame = frames[2];
                     frames[2] = frames[1];
                     frames[1] = frames[0];
