@@ -60,14 +60,14 @@ public class FrameManager : MonoBehaviour
 
     private void Shade(GameObject filter, float angle)
     {
-        float color;
+        //float color;
         if (angle >= 180f)
             angle -= 380f;
-        if (angle > 0)
-            color = 1f;
-        else
-            color = 0f;
-        filter.GetComponent<SpriteRenderer>().color = new Color(color, color, color, Mathf.Abs(angle) / 500);
+        //if (angle > 0)
+        //    color = 1f;
+        //else
+        //    color = 0f;
+        filter.GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f, Mathf.Abs(angle) / 150);
     }
 
     void Update()

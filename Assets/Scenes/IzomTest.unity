@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &80509076 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8334487711436638769, guid: a7b7ef72eb212c6498bddcd6bbd6c143, type: 3}
+  m_PrefabInstance: {fileID: 322919388}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &248544547
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,11 +240,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6421190889855442181, guid: a7b7ef72eb212c6498bddcd6bbd6c143, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -22.2
       objectReference: {fileID: 0}
     - target: {fileID: 6421190889855442181, guid: a7b7ef72eb212c6498bddcd6bbd6c143, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1.2
       objectReference: {fileID: 0}
     - target: {fileID: 6421190889855442181, guid: a7b7ef72eb212c6498bddcd6bbd6c143, type: 3}
       propertyPath: m_LocalPosition.z
@@ -905,7 +910,7 @@ PrefabInstance:
     - target: {fileID: 5716437408371592641, guid: 90df80c25879e44478389b936e282d1e, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 80509076}
     - target: {fileID: 5716437408371592641, guid: 90df80c25879e44478389b936e282d1e, type: 3}
       propertyPath: grids.Array.size
       value: 3
@@ -990,9 +995,17 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7466506678735487937, guid: 90df80c25879e44478389b936e282d1e, type: 3}
+      propertyPath: m_SortingOrder
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 7469922787923088201, guid: 90df80c25879e44478389b936e282d1e, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8184659964011162229, guid: 90df80c25879e44478389b936e282d1e, type: 3}
+      propertyPath: m_SortingOrder
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8319838431433204363, guid: 90df80c25879e44478389b936e282d1e, type: 3}
       propertyPath: m_LocalScale.x
@@ -1021,6 +1034,10 @@ PrefabInstance:
     - target: {fileID: 8941643460571449226, guid: 90df80c25879e44478389b936e282d1e, type: 3}
       propertyPath: m_CompositePaths.m_Paths.Array.size
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9115239479642394544, guid: 90df80c25879e44478389b936e282d1e, type: 3}
+      propertyPath: m_SortingOrder
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
