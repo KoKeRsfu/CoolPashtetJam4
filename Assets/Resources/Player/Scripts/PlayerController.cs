@@ -1,8 +1,8 @@
-﻿
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
 	private Rigidbody2D rb;
 	private BoxCollider2D collider;
 	private SpriteRenderer sprite;
+	private Light2D light;
 	
 	public float coyoteTime = 0;
 	public float coyoteTimeMax;
@@ -23,6 +24,8 @@ public class PlayerController : MonoBehaviour
 	
 	public float airTime = 0;
 	public float airTimeMax;
+	
+	public float lightLevel;
 	
 	public bool stop = false;
 	public Vector2 conservedVelocity;
@@ -37,6 +40,7 @@ public class PlayerController : MonoBehaviour
 		rb = this.GetComponent<Rigidbody2D>();
 		collider = this.GetComponent<BoxCollider2D>();
 		sprite = this.transform.GetChild(0).GetComponent<SpriteRenderer>();
+		light = this.transform.GetChild(1).GetComponent<Light2D>();
 	}
 
 	void Update()
@@ -51,6 +55,7 @@ public class PlayerController : MonoBehaviour
 			Resume();
 		}*/
 		
+		light.intensity = lightLevel;
 		
 		if (stop) return;
 		
@@ -140,4 +145,11 @@ public class PlayerController : MonoBehaviour
 		sprite.sprite = playerSprite[0];
 	}
 	
+	
+	public IEnumerator Death() 
+	{
+		sprite.enabled = false;
+		yield return WaitForSeconds(0.5f);
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+	}
 }
