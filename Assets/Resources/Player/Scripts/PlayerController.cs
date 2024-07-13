@@ -149,7 +149,7 @@ public class PlayerController : MonoBehaviour
 	public IEnumerator Death() 
 	{
 		sprite.enabled = false;
-		yield return WaitForSeconds(0.5f);
+		yield return new WaitForSeconds(0.5f);
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}
 }

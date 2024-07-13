@@ -100,7 +100,7 @@ public class FrameManager : MonoBehaviour
             Shade(new_frame.transform.GetChild(0).GetChild(1).gameObject, new_frame.transform.rotation.eulerAngles.x);
 
             t = elapsedTime / duration;
-            t = -3f * t * (t - 1) + 1.5f;
+            t = -2f * t * (t - 1) + 1f;
             player.transform.GetChild(0).transform.localScale = new Vector3(t, t, t);
 
             t = elapsedTime / duration;
@@ -110,9 +110,9 @@ public class FrameManager : MonoBehaviour
             if (!broke)
             {
                 if (frames[1].transform.GetChild(0).GetComponent<BoxCollider2D>().bounds.max.y <
-                    player.transform.position.y + 0.95 ||
+                    player.transform.position.y + 0.7 ||
                     frames[1].transform.GetChild(0).GetComponent<BoxCollider2D>().bounds.min.y >
-                    player.transform.position.y - 1.05)
+                    player.transform.position.y - 0.7)
                 {
                     if (rotateTo > 0)
                     {
@@ -130,15 +130,16 @@ public class FrameManager : MonoBehaviour
                 }
             }
             if (!blinked && (frames[1].transform.GetChild(0).GetComponent<BoxCollider2D>().bounds.max.y <
-                    player.transform.position.y + 1.45 ||
+                    player.transform.position.y + 1.3 ||
                     frames[1].transform.GetChild(0).GetComponent<BoxCollider2D>().bounds.min.y >
-                    player.transform.position.y - 1.55))
+                    player.transform.position.y - 1.3))
             {
                 blinked = true;
                 player.transform.GetChild(0).GetComponent<SpriteRenderer>().material = player_materials[1];
                 skin_changed = false;
                 player.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = dimensions[1].playerSprite[0];
                 player.GetComponent<PlayerController>().playerSprite = dimensions[1].playerSprite;
+                player.GetComponent<PlayerController>().lightLevel = dimensions[1].light;
                 blink_time = elapsedTime;
             }
             else if (!skin_changed && (blink_time + .2f <= elapsedTime))
@@ -172,7 +173,7 @@ public class FrameManager : MonoBehaviour
                 Shade(frames[0].transform.GetChild(0).GetChild(1).gameObject, frames[0].transform.rotation.eulerAngles.x);
                 Shade(frames[1].transform.GetChild(0).GetChild(1).gameObject, frames[1].transform.rotation.eulerAngles.x);
                 Shade(frames[2].transform.GetChild(0).GetChild(1).gameObject, frames[2].transform.rotation.eulerAngles.x);
-                player.transform.GetChild(0).transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+                player.transform.GetChild(0).transform.localScale = new Vector3(1f, 1f, 1f);
                 player.transform.GetChild(0).transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
                 player.GetComponent<PlayerController>().Resume();
                 player.GetComponent<Rigidbody2D>().gravityScale = dimensions[1].gravity;

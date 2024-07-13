@@ -683,22 +683,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1926854721}
-    - target: {fileID: 5716437408371592641, guid: 90df80c25879e44478389b936e282d1e, type: 3}
-      propertyPath: dimensions.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: c469de11abd3506468bcefa71da7ad9d, type: 2}
-    - target: {fileID: 5716437408371592641, guid: 90df80c25879e44478389b936e282d1e, type: 3}
-      propertyPath: player_materials.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5716437408371592641, guid: 90df80c25879e44478389b936e282d1e, type: 3}
-      propertyPath: player_materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
-    - target: {fileID: 5716437408371592641, guid: 90df80c25879e44478389b936e282d1e, type: 3}
-      propertyPath: player_materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
     - target: {fileID: 6785636275870409572, guid: 90df80c25879e44478389b936e282d1e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

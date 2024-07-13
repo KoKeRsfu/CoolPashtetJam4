@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Default
   m_EditorClassIdentifier: 
   gravity: 7.5
-  light: 1
+  light: 0
   lightColor: {r: 0, g: 0, b: 0, a: 0}
   air: 1
   multipleJumps: 0
