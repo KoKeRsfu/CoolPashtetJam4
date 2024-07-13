@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class FrameManager : MonoBehaviour
 {
@@ -70,6 +71,9 @@ public class FrameManager : MonoBehaviour
                 broke = false;
                 blinked = false;
                 rotation = UnityEngine.Random.Range(-25f, 25f);
+                frames[0].transform.GetChild(0).GetChild(3).GetChild(0).GetComponent<TilemapCollider2D>().enabled = false;
+                frames[1].transform.GetChild(0).GetChild(3).GetChild(0).GetComponent<TilemapCollider2D>().enabled = false;
+                frames[2].transform.GetChild(0).GetChild(3).GetChild(0).GetComponent<TilemapCollider2D>().enabled = false;
                 if (rotateTo > 0)
                 {
                     DimensionScriptable new_dimesion = dimensions[0];
@@ -173,6 +177,9 @@ public class FrameManager : MonoBehaviour
                 Shade(frames[0].transform.GetChild(0).GetChild(1).gameObject, frames[0].transform.rotation.eulerAngles.x);
                 Shade(frames[1].transform.GetChild(0).GetChild(1).gameObject, frames[1].transform.rotation.eulerAngles.x);
                 Shade(frames[2].transform.GetChild(0).GetChild(1).gameObject, frames[2].transform.rotation.eulerAngles.x);
+                frames[0].transform.GetChild(0).GetChild(3).GetChild(0).GetComponent<TilemapCollider2D>().enabled = true;
+                frames[1].transform.GetChild(0).GetChild(3).GetChild(0).GetComponent<TilemapCollider2D>().enabled = true;
+                frames[2].transform.GetChild(0).GetChild(3).GetChild(0).GetComponent<TilemapCollider2D>().enabled = true;
                 player.transform.GetChild(0).transform.localScale = new Vector3(1f, 1f, 1f);
                 player.transform.GetChild(0).transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
                 player.GetComponent<PlayerController>().Resume();
