@@ -1,3 +1,4 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ public class FrameManager : MonoBehaviour
     public float size = 3.5f * 3f;
     public float duration = 0.5f;
     public GameObject player;
+    public float shake_force = 1;
     private bool unlocked = true;
     private GameObject new_frame = null;
     private float new_frame_start = 0f;
@@ -78,6 +80,7 @@ public class FrameManager : MonoBehaviour
                         frames[1].transform.GetChild(1).transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
                     }
                     frames[1].transform.GetChild(1).GetComponent<ParticleSystem>().Play();
+                    this.GetComponent<CinemachineImpulseSource>().GenerateImpulse(shake_force);
                     broke = true;
                 }
 
