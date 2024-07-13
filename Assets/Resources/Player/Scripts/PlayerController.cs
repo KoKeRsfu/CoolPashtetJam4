@@ -16,24 +16,50 @@ public class PlayerController : MonoBehaviour
 	private SpriteRenderer sprite;
 	private Light2D light;
 	
-	public float coyoteTime = 0;
-	public float coyoteTimeMax;
-	
-	public float holdTime = 0;
-	public float holdTimeMax;
-	
 	public float airTime = 0;
 	public float airTimeMax;
 	
 	public float lightLevel;
 	
-	public bool stop = false;
-	public Vector2 conservedVelocity;
-	public float conservedGravity;
-	
 	public Sprite[] playerSprite;
 	
-	public RaycastHit2D hit;
+	[System.Serializable]
+	public class GamefeelMechanics
+	{
+		public float coyoteTime = 0;
+		public float coyoteTimeMax;
+	
+		public float holdTime = 0;
+		public float holdTimeMax;
+	}
+	
+	public GamefeelMechanics gamefeel;
+	
+	[System.Serializable]
+	public class stopMechanics 
+	{	
+		public bool stop = false;
+		public Vector2 conservedVelocity;
+		public float conservedGravity;
+	}
+	
+	public stopMechanics stopVariables;
+	
+	[System.Serializable] 
+	public class AnimationVariables 
+	{
+		public float animSpeed;
+		
+		public float currentFrame;
+		public int calculatedFrame;
+		public float prevMin;
+		public float minFrame;
+		public float maxFrame;
+	}
+	
+	public AnimationVariables animVariables;
+	
+	private RaycastHit2D hit;
 	
 	void Start()
 	{
@@ -57,9 +83,15 @@ public class PlayerController : MonoBehaviour
 		
 		light.intensity = lightLevel;
 		
-		if (stop) return;
+		if (stopVariables.stop) return;
 		
-		if (coyoteTime > 0) coyoteTime -= 1 * Time.deltaTime;
+		if (animVariables.currentFrame < animVariables.maxFrame) animVariables.currentFrame += animVariables.animSpeed * Time.deltaTime;
+		else animVariables.currentFrame = animVariables.minFrame;
+		
+		animVariables.calculatedFrame = Mathf.RoundToInt(animVariables.currentFrame);
+		sprite.sprite = playerSprite[animVariables.calculatedFrame];
+		
+		if (gamefeel.coyoteTime > 0) gamefeel.coyoteTime -= 1 * Time.deltaTime;
 		
 		if (airTime > 0 && airTimeMax > 0) airTime -= 0.1f * Time.deltaTime;
 		
@@ -76,22 +108,22 @@ public class PlayerController : MonoBehaviour
 		
 		if (hit.collider != null) 
 		{
-			coyoteTime = coyoteTimeMax;
-			holdTime = holdTimeMax;
+			gamefeel.coyoteTime = gamefeel.coyoteTimeMax;
+			gamefeel.holdTime = gamefeel.holdTimeMax;
 		}
 		
 		if (Input.GetKey(KeyCode.W))
 		{
-			if (coyoteTime > 0) 
+			if (gamefeel.coyoteTime > 0) 
 			{
-				coyoteTime = 0;
+				gamefeel.coyoteTime = 0;
 				rb.velocity = new Vector2(rb.velocity.x, 0);
 				rb.AddForce(new Vector2(horizontal, jumpPower), ForceMode2D.Impulse);
 			}		
 			
-			if (holdTime > 0)
+			if (gamefeel.holdTime > 0)
 			{
-				holdTime -= 1 * Time.deltaTime;	
+				gamefeel.holdTime -= 1 * Time.deltaTime;	
 				
 				rb.AddForce(new Vector2(horizontal, jumpPower * 0.7f), ForceMode2D.Force);
 			}
@@ -100,7 +132,7 @@ public class PlayerController : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		if (stop) return;
+		if (stopVariables.stop) return;
 		
 		if (horizontal > 0) 
 		{
@@ -116,6 +148,26 @@ public class PlayerController : MonoBehaviour
 		{
 			rb.velocity = new Vector2(rb.velocity.x * 0.88f, rb.velocity.y);
 		}
+		
+		if (gamefeel.coyoteTime <= 0) 
+		{
+			if (rb.velocity.y > 0) ChangeAnimationState(2);
+			else ChangeAnimationState(3);
+		}
+		else
+		{
+			if (horizontal == 0)
+			{
+				ChangeAnimationState(0);
+			}
+			else
+			{
+				ChangeAnimationState(1);
+			}
+		}
+		
+		rb.velocity = new Vector2(rb.velocity.x * 0.88f, rb.velocity.y);
+
 		if (rb.velocity.x > maxSpeed)
 		{
 			rb.velocity = new Vector2(maxSpeed, rb.velocity.y);
@@ -128,23 +180,49 @@ public class PlayerController : MonoBehaviour
 		rb.velocity = new Vector2(rb.velocity.x + horizontal * speed, rb.velocity.y);
 	}
 	
+	public void ChangeAnimationState(int a)
+	{
+		switch(a) //0 - idle, 1 - run, 2 - jump, 3 - fall
+		{
+		case 0:
+			animVariables.minFrame = -0.45f;
+			animVariables.maxFrame = 3.45f;
+			break;
+		case 1:
+			animVariables.minFrame = 3.55F;
+			animVariables.maxFrame = 7.45f;
+			break;
+		case 2:
+			animVariables.minFrame = 7.55f;
+			animVariables.maxFrame = 8.45f;
+			break;
+		case 3:
+			animVariables.minFrame = 8.55f;
+			animVariables.maxFrame = 10.45f;
+			break;
+		}
+		
+		if (animVariables.prevMin != animVariables.minFrame) animVariables.currentFrame = animVariables.minFrame;
+		animVariables.prevMin = animVariables.minFrame;
+	}
+	
 	public void Stop() 
 	{	
-		conservedVelocity = new Vector2(rb.velocity.x * 5f, rb.velocity.y * 1f);
-		conservedGravity = rb.gravityScale;
+		stopVariables.conservedVelocity = new Vector2(rb.velocity.x * 5f, rb.velocity.y * 1f);
+		stopVariables.conservedGravity = rb.gravityScale;
 		rb.gravityScale = 0;
 		rb.velocity = Vector2.zero;
 		collider.enabled = false;
-		stop = true;
+		stopVariables.stop = true;
 	}
 	
 	public void Resume() 
 	{
 		rb.bodyType = RigidbodyType2D.Dynamic;
 		collider.enabled = true;
-		stop = false;
-		rb.velocity = conservedVelocity;
-		rb.gravityScale = conservedGravity;
+		stopVariables.stop = false;
+		rb.velocity = stopVariables.conservedVelocity;
+		rb.gravityScale = stopVariables.conservedGravity;
 		
 		sprite.sprite = playerSprite[0];
 	}
