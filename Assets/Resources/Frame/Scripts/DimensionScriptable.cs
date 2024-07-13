@@ -11,5 +11,5 @@ public class DimensionScriptable : ScriptableObject
 	public bool multipleJumps;
 	public bool invertedControls;	
 	
-	public Sprite playerSprite;
+	public Sprite[] playerSprite;
 }
