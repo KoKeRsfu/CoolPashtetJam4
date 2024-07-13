@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿	using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering.Universal;
+using Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -59,6 +60,18 @@ public class PlayerController : MonoBehaviour
 	
 	public AnimationVariables animVariables;
 	
+	[System.Serializable]
+	public class DeathVariables
+	{
+		public GameObject bloodParticles;
+		public GameObject goreParticles;
+		public bool isDying = false;
+		
+		public List<GameObject> blood = new List<GameObject>();
+	}
+	
+	public DeathVariables deathVariables;
+	
 	private RaycastHit2D hit;
 	
 	void Start()
@@ -71,15 +84,10 @@ public class PlayerController : MonoBehaviour
 
 	void Update()
 	{
-		/*
 		if (Input.GetKeyDown(KeyCode.H)) 
 		{
-			Stop();
+			StartCoroutine("Death");
 		}
-		if (Input.GetKeyDown(KeyCode.J)) 
-		{
-			Resume();
-		}*/
 		
 		light.intensity = lightLevel;
 		
@@ -186,19 +194,19 @@ public class PlayerController : MonoBehaviour
 		{
 		case 0:
 			animVariables.minFrame = -0.45f;
-			animVariables.maxFrame = 3.45f;
+			animVariables.maxFrame = 3.4f;
 			break;
 		case 1:
 			animVariables.minFrame = 3.55F;
-			animVariables.maxFrame = 7.45f;
+			animVariables.maxFrame = 7.4f;
 			break;
 		case 2:
 			animVariables.minFrame = 7.55f;
-			animVariables.maxFrame = 8.45f;
+			animVariables.maxFrame = 8.4f;
 			break;
 		case 3:
 			animVariables.minFrame = 8.55f;
-			animVariables.maxFrame = 10.45f;
+			animVariables.maxFrame = 10f;
 			break;
 		}
 		
@@ -230,8 +238,23 @@ public class PlayerController : MonoBehaviour
 	
 	public IEnumerator Death() 
 	{
+		deathVariables.isDying = true;
 		sprite.enabled = false;
-		yield return new WaitForSeconds(0.5f);
+		
+		this.GetComponent<CinemachineImpulseSource>().GenerateImpulseAt(transform.position, new Vector2(Random.Range(-1f,1f), Random.Range(-1f,1f)));
+		
+		Instantiate(deathVariables.bloodParticles, transform.position, deathVariables.bloodParticles.transform.rotation);
+		Instantiate(deathVariables.goreParticles, transform.position, deathVariables.goreParticles.transform.rotation);
+		
+		int r = Random.Range(4,8);
+		for (int i=0;i<r;i++) 
+		{
+			Instantiate(deathVariables.blood[Random.Range(0,deathVariables.blood.Count)],	
+				new Vector3(transform.position.x + Random.Range(-1.2f,1.2f), transform.position.y + Random.Range(-1.6f,1.2f), 0), 
+				Quaternion.Euler(0,0,Random.Range(-45f,45f)));
+		}
+		
+		yield return new WaitForSeconds(3f);
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}
 }
