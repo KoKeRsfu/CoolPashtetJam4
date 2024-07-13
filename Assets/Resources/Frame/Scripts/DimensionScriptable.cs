@@ -10,4 +10,6 @@ public class DimensionScriptable : ScriptableObject
 	public float air;
 	public bool multipleJumps;
 	public bool invertedControls;	
+	
+	public Sprite playerSprite;
 }
