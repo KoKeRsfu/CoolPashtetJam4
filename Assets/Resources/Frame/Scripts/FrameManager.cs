@@ -2,6 +2,7 @@ using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -46,7 +47,9 @@ public class FrameManager : MonoBehaviour
         Rotate(grids[1].transform, 0);
         Rotate(grids[2].transform, -45);
         foreach(GameObject frame in frames)
-            Shade(frame.transform.GetChild(0).GetChild(1).gameObject, frame.transform.rotation.eulerAngles.x);
+            Shade(frame.transform.GetChild(0).GetChild(1).gameObject, frame.transform.rotation.eulerAngles.x, 0f);
+        foreach (GameObject frame in frames)
+            Shade(frame.transform.GetChild(0).GetChild(4).gameObject, frame.transform.rotation.eulerAngles.x, 1f);
     }
 
     private void Rotate(Transform grid, float angle)
@@ -58,7 +61,7 @@ public class FrameManager : MonoBehaviour
             Mathf.Sin((angle + 22.5f) * Mathf.Deg2Rad)) * 1.30656296488f, 1f);
     }
 
-    private void Shade(GameObject filter, float angle)
+    private void Shade(GameObject filter, float angle, float color)
     {
         //float color;
         if (angle >= 180f)
@@ -67,13 +70,19 @@ public class FrameManager : MonoBehaviour
         //    color = 1f;
         //else
         //    color = 0f;
-        filter.GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f, Mathf.Abs(angle) / 150);
+        filter.GetComponent<SpriteRenderer>().color = new Color(color, color, color, Mathf.Abs(angle) / 150);
     }
 
     void Update()
     {
+        if (player.GetComponent<PlayerController>().deathVariables.isDying)
+            return;
         if (unlocked) 
         {
+            foreach (GameObject frame in frames)
+            {
+                frame.transform.GetChild(0).GetChild(4).transform.localPosition = player.transform.localPosition;
+            }
             float direction = Input.GetAxisRaw("Mouse ScrollWheel");
             if (direction != 0)
             {
@@ -116,8 +125,11 @@ public class FrameManager : MonoBehaviour
             frames[2].transform.rotation = Quaternion.Euler(-45f + t * rotateTo, 0f, 0f);
             new_frame.transform.rotation = Quaternion.Euler(new_frame_start + t * rotateTo, 0f, 0f);
             foreach(GameObject frame in frames)
-                Shade(frame.transform.GetChild(0).GetChild(1).gameObject, frame.transform.rotation.eulerAngles.x);
-            Shade(new_frame.transform.GetChild(0).GetChild(1).gameObject, new_frame.transform.rotation.eulerAngles.x);
+                Shade(frame.transform.GetChild(0).GetChild(1).gameObject, frame.transform.rotation.eulerAngles.x, 0f);
+            Shade(new_frame.transform.GetChild(0).GetChild(1).gameObject, new_frame.transform.rotation.eulerAngles.x, 0f);
+            foreach (GameObject frame in frames)
+                Shade(frame.transform.GetChild(0).GetChild(4).gameObject, frame.transform.rotation.eulerAngles.x, 1f);
+            Shade(new_frame.transform.GetChild(0).GetChild(4).gameObject, new_frame.transform.rotation.eulerAngles.x, 1f);
 
             t = elapsedTime / duration;
             t = -2f * t * (t - 1) + 1f;
@@ -199,9 +211,10 @@ public class FrameManager : MonoBehaviour
                 frames[0].transform.rotation = Quaternion.Euler(45f, 0f, 0f);
                 frames[1].transform.rotation = Quaternion.Euler(0f, 0f, 0f);
                 frames[2].transform.rotation = Quaternion.Euler(-45f, 0f, 0f);
-                Shade(frames[0].transform.GetChild(0).GetChild(1).gameObject, frames[0].transform.rotation.eulerAngles.x);
-                Shade(frames[1].transform.GetChild(0).GetChild(1).gameObject, frames[1].transform.rotation.eulerAngles.x);
-                Shade(frames[2].transform.GetChild(0).GetChild(1).gameObject, frames[2].transform.rotation.eulerAngles.x);
+                foreach (GameObject frame in frames)
+                    Shade(frame.transform.GetChild(0).GetChild(1).gameObject, frame.transform.rotation.eulerAngles.x, 0f);
+                foreach (GameObject frame in frames)
+                    Shade(frame.transform.GetChild(0).GetChild(4).gameObject, frame.transform.rotation.eulerAngles.x, 1f);
                 Rotate(grids[0].transform, 45);
                 Rotate(grids[1].transform, 0);
                 Rotate(grids[2].transform, -45);
