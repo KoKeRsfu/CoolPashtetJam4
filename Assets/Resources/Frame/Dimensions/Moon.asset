@@ -19,14 +19,14 @@ MonoBehaviour:
   multipleJumps: 0
   invertedControls: 0
   playerSprite:
-  - {fileID: 1855761955, guid: 8f1b8e7935074e64a93840f49e48e011, type: 3}
-  - {fileID: 1855761955, guid: 8f1b8e7935074e64a93840f49e48e011, type: 3}
-  - {fileID: 1855761955, guid: 8f1b8e7935074e64a93840f49e48e011, type: 3}
-  - {fileID: 1855761955, guid: 8f1b8e7935074e64a93840f49e48e011, type: 3}
-  - {fileID: 1855761955, guid: 8f1b8e7935074e64a93840f49e48e011, type: 3}
-  - {fileID: 1855761955, guid: 8f1b8e7935074e64a93840f49e48e011, type: 3}
-  - {fileID: 1855761955, guid: 8f1b8e7935074e64a93840f49e48e011, type: 3}
-  - {fileID: 1855761955, guid: 8f1b8e7935074e64a93840f49e48e011, type: 3}
-  - {fileID: 1855761955, guid: 8f1b8e7935074e64a93840f49e48e011, type: 3}
-  - {fileID: 1855761955, guid: 8f1b8e7935074e64a93840f49e48e011, type: 3}
-  - {fileID: 1855761955, guid: 8f1b8e7935074e64a93840f49e48e011, type: 3}
+  - {fileID: -367611029, guid: 36e567efb7ff2564abbf4b2993f08add, type: 3}
+  - {fileID: -147662764, guid: 36e567efb7ff2564abbf4b2993f08add, type: 3}
+  - {fileID: -90725936, guid: 36e567efb7ff2564abbf4b2993f08add, type: 3}
+  - {fileID: 46689090, guid: 36e567efb7ff2564abbf4b2993f08add, type: 3}
+  - {fileID: 88250656, guid: 36e567efb7ff2564abbf4b2993f08add, type: 3}
+  - {fileID: -1185200882, guid: 36e567efb7ff2564abbf4b2993f08add, type: 3}
+  - {fileID: -1593616504, guid: 36e567efb7ff2564abbf4b2993f08add, type: 3}
+  - {fileID: 1589577604, guid: 36e567efb7ff2564abbf4b2993f08add, type: 3}
+  - {fileID: -2080578224, guid: 36e567efb7ff2564abbf4b2993f08add, type: 3}
+  - {fileID: 351137569, guid: 36e567efb7ff2564abbf4b2993f08add, type: 3}
+  - {fileID: -798630282, guid: 36e567efb7ff2564abbf4b2993f08add, type: 3}
