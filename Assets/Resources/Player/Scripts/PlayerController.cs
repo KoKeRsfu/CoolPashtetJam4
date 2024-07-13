@@ -68,7 +68,11 @@ public class PlayerController : MonoBehaviour
 		horizontal = Input.GetAxisRaw("Horizontal");
 
 		int layerMask = 1 << 6;
-		hit = Physics2D.Raycast(transform.position, -Vector2.up, ((collider.size.y / 2) + collider.offset.y/2 + 0.2f), layerMask);
+		
+		float distance = ((collider.size.y / 2) + collider.offset.y/2 + 0.35f);
+		hit = Physics2D.Raycast(transform.position, -Vector2.up, distance, layerMask);
+		//Debug.DrawRay(transform.position, -Vector2.up * distance, Color.yellow, 0.1f);
+		
 		
 		if (hit.collider != null) 
 		{
