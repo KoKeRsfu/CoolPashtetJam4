@@ -69,15 +69,15 @@ public class FrameManager : MonoBehaviour
                 {
                     if (rotateTo > 0)
                     {
-                        this.transform.GetChild(0).transform.position = new Vector3(0f, -1f, 0f) + player.transform.position;
-                        this.transform.GetChild(0).transform.rotation = Quaternion.Euler(90f, 0f, 0f);
+                        frames[1].transform.GetChild(1).transform.position = new Vector3(0f, -1f, 0f) + player.transform.position;
+                        frames[1].transform.GetChild(1).transform.rotation = Quaternion.Euler(90f, 0f, 0f);
                     }
                     else 
                     {
-                        this.transform.GetChild(0).transform.position = new Vector3(0f, .8f, 0f) + player.transform.position;
-                        this.transform.GetChild(0).transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
+                        frames[1].transform.GetChild(1).transform.position = new Vector3(0f, .8f, 0f) + player.transform.position;
+                        frames[1].transform.GetChild(1).transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
                     }
-                    this.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
+                    frames[1].transform.GetChild(1).GetComponent<ParticleSystem>().Play();
                     broke = true;
                 }
 
