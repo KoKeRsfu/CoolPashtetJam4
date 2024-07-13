@@ -217,18 +217,37 @@ MonoBehaviour:
   speed: 5
   maxSpeed: 7
   jumpPower: 20
-  coyoteTime: 0
-  coyoteTimeMax: 0.2
-  holdTime: 0
-  holdTimeMax: 0.2
   airTime: 0
   airTimeMax: 0
   lightLevel: 0
-  stop: 0
-  conservedVelocity: {x: 0, y: 0}
-  conservedGravity: 0
   playerSprite:
-  - {fileID: 21300000, guid: a2963761026e3bc47bbc0fdc84314b2a, type: 3}
+  - {fileID: 963822224, guid: 80f45799dc2d07343b197e9138c03c34, type: 3}
+  - {fileID: -1184899163, guid: 80f45799dc2d07343b197e9138c03c34, type: 3}
+  - {fileID: -309870384, guid: 80f45799dc2d07343b197e9138c03c34, type: 3}
+  - {fileID: -699273480, guid: 80f45799dc2d07343b197e9138c03c34, type: 3}
+  - {fileID: 2079735320, guid: 80f45799dc2d07343b197e9138c03c34, type: 3}
+  - {fileID: -773408329, guid: 80f45799dc2d07343b197e9138c03c34, type: 3}
+  - {fileID: 1223225123, guid: 80f45799dc2d07343b197e9138c03c34, type: 3}
+  - {fileID: -1470868600, guid: 80f45799dc2d07343b197e9138c03c34, type: 3}
+  - {fileID: -1859660529, guid: 80f45799dc2d07343b197e9138c03c34, type: 3}
+  - {fileID: 1199116185, guid: 80f45799dc2d07343b197e9138c03c34, type: 3}
+  - {fileID: 668599205, guid: 80f45799dc2d07343b197e9138c03c34, type: 3}
+  gamefeel:
+    coyoteTime: 0
+    coyoteTimeMax: 0.2
+    holdTime: 0
+    holdTimeMax: 0.2
+  stopVariables:
+    stop: 0
+    conservedVelocity: {x: 0, y: 0}
+    conservedGravity: 0
+  animVariables:
+    animSpeed: 10
+    currentFrame: 0
+    calculatedFrame: 0
+    prevMin: 0
+    minFrame: 0
+    maxFrame: 0
 --- !u!61 &5068433853156063878
 BoxCollider2D:
   m_ObjectHideFlags: 0
