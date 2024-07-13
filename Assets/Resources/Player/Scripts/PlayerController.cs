@@ -1,5 +1,4 @@
-﻿//нужно добавить к персонажу Rigidbody2D и Collider2D
-
+﻿
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,6 +27,8 @@ public class PlayerController : MonoBehaviour
 	public bool stop = false;
 	public Vector2 conservedVelocity;
 	public float conservedGravity;
+	
+	public Sprite[] playerSprite;
 	
 	public RaycastHit2D hit;
 	
@@ -94,11 +95,11 @@ public class PlayerController : MonoBehaviour
 		
 		if (horizontal > 0) 
 		{
-			sprite.flipX = false;
+			transform.rotation = Quaternion.Euler(0f, 0f, 0f);
 		}
 		if (horizontal < 0) 
 		{
-			sprite.flipX = true;
+			transform.rotation = Quaternion.Euler(0f, 180f, 0f);
 		}
 		
 		
@@ -135,6 +136,8 @@ public class PlayerController : MonoBehaviour
 		stop = false;
 		rb.velocity = conservedVelocity;
 		rb.gravityScale = conservedGravity;
+		
+		sprite.sprite = playerSprite[0];
 	}
 	
 }
