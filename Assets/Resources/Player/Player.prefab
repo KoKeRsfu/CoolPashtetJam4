@@ -178,6 +178,7 @@ GameObject:
   - component: {fileID: 5414546295082620413}
   - component: {fileID: 5068433853156063878}
   - component: {fileID: 3569940207205970693}
+  - component: {fileID: 9014015510656665119}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -246,8 +247,16 @@ MonoBehaviour:
     currentFrame: 0
     calculatedFrame: 0
     prevMin: 0
-    minFrame: 0
-    maxFrame: 0
+    minFrame: -0.45
+    maxFrame: 3.4
+  deathVariables:
+    bloodParticles: {fileID: 5560350476405115528, guid: a6e308b1534ba7f499c0e6d27a41ef38, type: 3}
+    goreParticles: {fileID: 3726378304019022201, guid: 0ff15bc866cf5484faac51119312c957, type: 3}
+    isDying: 0
+    blood:
+    - {fileID: 1476154462962658540, guid: b3f27c05ba6f0a340be4d9f7b3b6dd13, type: 3}
+    - {fileID: 1605081039790807706, guid: 80067ff670e322640b62805a672ff791, type: 3}
+    - {fileID: 316660175726126199, guid: 6739463ccbc420d449014622c21c4614, type: 3}
 --- !u!61 &5068433853156063878
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -320,3 +329,56 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &9014015510656665119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8334487711436638769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_ImpulseShape: 3
+    m_CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ImpulseDuration: 0.4
+    m_ImpulseType: 0
+    m_DissipationRate: 0.25
+    m_RawSignal: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 100
+    m_PropagationSpeed: 343
+  m_DefaultVelocity: {x: 0, y: 0, z: 0}
