@@ -26,7 +26,21 @@ public class FrameManager : MonoBehaviour
 
     void Start()
     {
+        Shade(frames[0].transform.GetChild(0).GetChild(1).gameObject, frames[0].transform.rotation.eulerAngles.x);
+        Shade(frames[1].transform.GetChild(0).GetChild(1).gameObject, frames[1].transform.rotation.eulerAngles.x);
+        Shade(frames[2].transform.GetChild(0).GetChild(1).gameObject, frames[2].transform.rotation.eulerAngles.x);
+    }
 
+    private void Shade(GameObject filter, float angle)
+    {
+        float color;
+        if (angle >= 180f)
+            angle -= 380f;
+        if (angle > 0)
+            color = 1f;
+        else
+            color = 0f;
+        filter.GetComponent<SpriteRenderer>().color = new Color(color, color, color, Mathf.Abs(angle) / 500);
     }
 
     void Update()
@@ -80,6 +94,10 @@ public class FrameManager : MonoBehaviour
             frames[1].transform.rotation = Quaternion.Euler(t * rotateTo, 0f, 0f);
             frames[2].transform.rotation = Quaternion.Euler(-45f + t * rotateTo, 0f, 0f);
             new_frame.transform.rotation = Quaternion.Euler(new_frame_start + t * rotateTo, 0f, 0f);
+            Shade(frames[0].transform.GetChild(0).GetChild(1).gameObject, frames[0].transform.rotation.eulerAngles.x);
+            Shade(frames[1].transform.GetChild(0).GetChild(1).gameObject, frames[1].transform.rotation.eulerAngles.x);
+            Shade(frames[2].transform.GetChild(0).GetChild(1).gameObject, frames[2].transform.rotation.eulerAngles.x);
+            Shade(new_frame.transform.GetChild(0).GetChild(1).gameObject, new_frame.transform.rotation.eulerAngles.x);
 
             t = elapsedTime / duration;
             t = -3f * t * (t - 1) + 1.5f;
@@ -151,6 +169,9 @@ public class FrameManager : MonoBehaviour
                 frames[0].transform.rotation = Quaternion.Euler(45f, 0f, 0f);
                 frames[1].transform.rotation = Quaternion.Euler(0f, 0f, 0f);
                 frames[2].transform.rotation = Quaternion.Euler(-45f, 0f, 0f);
+                Shade(frames[0].transform.GetChild(0).GetChild(1).gameObject, frames[0].transform.rotation.eulerAngles.x);
+                Shade(frames[1].transform.GetChild(0).GetChild(1).gameObject, frames[1].transform.rotation.eulerAngles.x);
+                Shade(frames[2].transform.GetChild(0).GetChild(1).gameObject, frames[2].transform.rotation.eulerAngles.x);
                 player.transform.GetChild(0).transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
                 player.transform.GetChild(0).transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
                 player.GetComponent<PlayerController>().Resume();
