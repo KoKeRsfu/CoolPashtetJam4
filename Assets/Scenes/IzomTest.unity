@@ -902,6 +902,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 80509076}
+    - target: {fileID: 5716437408371592641, guid: 90df80c25879e44478389b936e282d1e, type: 3}
+      propertyPath: breakClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 39b97a9b5f4ce3a4d97dd3468910e6bc, type: 3}
     - target: {fileID: 6785636275870409572, guid: 90df80c25879e44478389b936e282d1e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

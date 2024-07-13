@@ -17,6 +17,8 @@ public class FrameManager : MonoBehaviour
     public GameObject player;
     public float shake_force = 1;
     public Material[] player_materials;
+    public AudioClip breakClip;
+
     private bool unlocked = true;
     private GameObject new_frame = null;
     private float new_frame_start = 0f;
@@ -159,6 +161,8 @@ public class FrameManager : MonoBehaviour
                     frames[1].transform.GetChild(1).GetComponent<ParticleSystem>().Play();
                     this.GetComponent<CinemachineImpulseSource>().GenerateImpulse(shake_force);
                     broke = true;
+                    GameObject soundPlayer = Instantiate(Resources.Load<GameObject>("Audio/Prefabs/SoundPlayer"));
+                    soundPlayer.GetComponent<SoundManager>().audioClip = breakClip;
                 }
             }
             if (!blinked && (frames[1].transform.GetChild(0).GetComponent<BoxCollider2D>().bounds.max.y <
