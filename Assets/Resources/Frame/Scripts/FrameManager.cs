@@ -2,6 +2,7 @@ using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -17,7 +18,6 @@ public class FrameManager : MonoBehaviour
     public Material[] player_materials;
     private bool unlocked = true;
     private GameObject new_frame = null;
-    private GameObject new_grid = null;
     private float new_frame_start = 0f;
     private float rotateTo = 0f;
     private float elapsedTime = 0f;
@@ -29,39 +29,24 @@ public class FrameManager : MonoBehaviour
 
     void Start()
     {
-        GameObject grid0 = Instantiate(grids[0]);
-        grids[0].GetComponentInChildren<TilemapRenderer>().enabled = false;
-        grid0.GetComponentInChildren<TilemapCollider2D>().enabled = false;
-        grid0.transform.SetParent(frames[0].transform);
-        grid0.transform.localPosition = new Vector3(0f, 0f, -16.89949f);
-        GameObject grid1 = Instantiate(grids[1]);
-        grids[1].GetComponentInChildren<TilemapRenderer>().enabled = false;
-        grid1.GetComponentInChildren<TilemapCollider2D>().enabled = false;
-        grid1.transform.SetParent(frames[1].transform);
-        grid1.transform.localPosition = new Vector3(0f, 0f, -16.89949f);
-        GameObject grid2 = Instantiate(grids[2]);
-        grids[2].GetComponentInChildren<TilemapRenderer>().enabled = false;
-        grid2.GetComponentInChildren<TilemapCollider2D>().enabled = false;
-        grid2.transform.SetParent(frames[2].transform);
-        grid2.transform.localPosition = new Vector3(0f, 0f, -16.89949f);
-        frames[0].transform.position = new Vector3(0f, 0f, 18.23283f);
-        frames[1].transform.position = new Vector3(0f, 0f, 18.23283f);
-        frames[2].transform.position = new Vector3(0f, 0f, 18.23283f);
+        for (byte i = 0; i < 3; i++)
+        {
+            GameObject grid = Instantiate(grids[i]);
+            grids[i].GetComponentInChildren<TilemapRenderer>().enabled = false;
+            grid.GetComponentInChildren<TilemapCollider2D>().enabled = false;
+            grid.transform.SetParent(frames[i].transform);
+            grid.transform.localPosition = new Vector3(0f, 0f, -16.89949f);
+            frames[i].transform.position = new Vector3(0f, 0f, 18.23283f);
+        }
+
         frames[0].transform.rotation = Quaternion.Euler(45f, 0f, 0f);
         frames[1].transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         frames[2].transform.rotation = Quaternion.Euler(-45f, 0f, 0f);
-        //grids[0].transform.localPosition = new Vector3(0f, 11.9497474683f, 0f);
-        //grids[1].transform.localPosition = new Vector3(0f, 0f, 0f);
-        //grids[2].transform.localPosition = new Vector3(0f, -11.9497474683f, 0f);
-        //grids[0].transform.localScale = new Vector3(1f, 0.7071068f, 1f);
-        //grids[1].transform.localScale = new Vector3(1f, 1f, 1f);
-        //grids[2].transform.localScale = new Vector3(1f, 0.7071068f, 1f);
         Rotate(grids[0].transform, 45);
         Rotate(grids[1].transform, 0);
         Rotate(grids[2].transform, -45);
-        Shade(frames[0].transform.GetChild(0).GetChild(1).gameObject, frames[0].transform.rotation.eulerAngles.x);
-        Shade(frames[1].transform.GetChild(0).GetChild(1).gameObject, frames[1].transform.rotation.eulerAngles.x);
-        Shade(frames[2].transform.GetChild(0).GetChild(1).gameObject, frames[2].transform.rotation.eulerAngles.x);
+        foreach(GameObject frame in frames)
+            Shade(frame.transform.GetChild(0).GetChild(1).gameObject, frame.transform.rotation.eulerAngles.x);
     }
 
     private void Rotate(Transform grid, float angle)
@@ -99,30 +84,6 @@ public class FrameManager : MonoBehaviour
                     new_frame.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
                     rotateTo = 45f;
                     new_frame_start = -90f;
-                }
-                else
-                {
-                    new_frame = Instantiate(frames[2]);
-                    new_frame.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
-                    rotateTo = -45;
-                    new_frame_start = 90f;
-                }
-                elapsedTime = 0f;
-                player.GetComponent<PlayerController>().Stop();
-                broke = false;
-                blinked = false;
-                rotation = UnityEngine.Random.Range(-25f, 25f);
-                //frames[0].GetComponentInChildren<TilemapCollider2D>().gameObject.SetActive(false);
-                //frames[1].GetComponentInChildren<TilemapCollider2D>().gameObject.SetActive(false);
-                //frames[2].GetComponentInChildren<TilemapCollider2D>().gameObject.SetActive(false);
-                //frames[0].GetComponentInChildren<TilemapCollider2D>().enabled = false;
-                //frames[1].GetComponentInChildren<TilemapCollider2D>().enabled = false;
-                //frames[2].GetComponentInChildren<TilemapCollider2D>().enabled = false;
-                //foreach (GameObject grid in grids)
-                //    foreach (TilemapRenderer tilemap in grid.GetComponentsInChildren<TilemapRenderer>())
-                //        tilemap.enabled = false;
-                if (rotateTo > 0)
-                {
                     DimensionScriptable new_dimesion = dimensions[0];
                     dimensions[0] = dimensions[1];
                     dimensions[1] = dimensions[2];
@@ -130,11 +91,20 @@ public class FrameManager : MonoBehaviour
                 }
                 else
                 {
+                    new_frame = Instantiate(frames[2]);
+                    new_frame.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
+                    rotateTo = -45;
+                    new_frame_start = 90f;
                     DimensionScriptable new_dimesion = dimensions[2];
                     dimensions[2] = dimensions[1];
                     dimensions[1] = dimensions[0];
                     dimensions[0] = new_dimesion;
                 }
+                elapsedTime = 0f;
+                player.GetComponent<PlayerController>().Stop();
+                broke = false;
+                blinked = false;
+                rotation = UnityEngine.Random.Range(-25f, 25f);
             }
         }
         else 
@@ -145,13 +115,8 @@ public class FrameManager : MonoBehaviour
             frames[1].transform.rotation = Quaternion.Euler(t * rotateTo, 0f, 0f);
             frames[2].transform.rotation = Quaternion.Euler(-45f + t * rotateTo, 0f, 0f);
             new_frame.transform.rotation = Quaternion.Euler(new_frame_start + t * rotateTo, 0f, 0f);
-            //Rotate(grids[0].transform, 45f + t * rotateTo);
-            //Rotate(grids[1].transform, t * rotateTo);
-            //Rotate(grids[2].transform, -45f + t * rotateTo);
-            //Rotate(new_grid.transform, new_frame_start + t * rotateTo);
-            Shade(frames[0].transform.GetChild(0).GetChild(1).gameObject, frames[0].transform.rotation.eulerAngles.x);
-            Shade(frames[1].transform.GetChild(0).GetChild(1).gameObject, frames[1].transform.rotation.eulerAngles.x);
-            Shade(frames[2].transform.GetChild(0).GetChild(1).gameObject, frames[2].transform.rotation.eulerAngles.x);
+            foreach(GameObject frame in frames)
+                Shade(frame.transform.GetChild(0).GetChild(1).gameObject, frame.transform.rotation.eulerAngles.x);
             Shade(new_frame.transform.GetChild(0).GetChild(1).gameObject, new_frame.transform.rotation.eulerAngles.x);
 
             t = elapsedTime / duration;
@@ -192,7 +157,8 @@ public class FrameManager : MonoBehaviour
                 blinked = true;
                 player.transform.GetChild(0).GetComponent<SpriteRenderer>().material = player_materials[1];
                 skin_changed = false;
-                player.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = dimensions[1].playerSprite[0];
+                player.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = dimensions[1].playerSprite[
+                    player.GetComponent<PlayerController>().animVariables.calculatedFrame];
                 player.GetComponent<PlayerController>().playerSprite = dimensions[1].playerSprite;
                 player.GetComponent<PlayerController>().lightLevel = dimensions[1].light;
                 blink_time = elapsedTime;
@@ -214,10 +180,10 @@ public class FrameManager : MonoBehaviour
                     frames[0] = frames[1];
                     frames[1] = frames[2];
                     frames[2] = new_frame;
-                    new_grid = grids[0];
+                    new_frame = grids[0];
                     grids[0] = grids[1];
                     grids[1] = grids[2];
-                    grids[2] = new_grid;
+                    grids[2] = new_frame;
                 }
                 else
                 {
@@ -225,10 +191,10 @@ public class FrameManager : MonoBehaviour
                     frames[2] = frames[1];
                     frames[1] = frames[0];
                     frames[0] = new_frame;
-                    new_grid = grids[2];
+                    new_frame = grids[2];
                     grids[2] = grids[1];
                     grids[1] = grids[0];
-                    grids[0] = new_grid;
+                    grids[0] = new_frame;
                 }
                 frames[0].transform.rotation = Quaternion.Euler(45f, 0f, 0f);
                 frames[1].transform.rotation = Quaternion.Euler(0f, 0f, 0f);
@@ -236,21 +202,6 @@ public class FrameManager : MonoBehaviour
                 Shade(frames[0].transform.GetChild(0).GetChild(1).gameObject, frames[0].transform.rotation.eulerAngles.x);
                 Shade(frames[1].transform.GetChild(0).GetChild(1).gameObject, frames[1].transform.rotation.eulerAngles.x);
                 Shade(frames[2].transform.GetChild(0).GetChild(1).gameObject, frames[2].transform.rotation.eulerAngles.x);
-                //frames[0].GetComponentInChildren<TilemapCollider2D>().gameObject.transform.localPosition = new Vector3(0f, 0f, 0f);
-                //frames[1].GetComponentInChildren<TilemapCollider2D>().gameObject.transform.localPosition = new Vector3(0f, 0f, 0f);
-                //frames[2].GetComponentInChildren<TilemapCollider2D>().gameObject.transform.localPosition = new Vector3(0f, 0f, 0f);
-                //frames[0].GetComponentInChildren<TilemapCollider2D>().enabled = true;
-                //frames[1].GetComponentInChildren<TilemapCollider2D>().enabled = true;
-                //frames[2].GetComponentInChildren<TilemapCollider2D>().enabled = true;
-                //frames[0].GetComponentInChildren<TilemapCollider2D>().gameObject.SetActive(true);
-                //frames[1].GetComponentInChildren<TilemapCollider2D>().gameObject.SetActive(true);
-                //frames[2].GetComponentInChildren<TilemapCollider2D>().gameObject.SetActive(true);
-                //frames[0].GetComponentInChildren<CompositeCollider2D>().GenerateGeometry();
-                //frames[1].GetComponentInChildren<CompositeCollider2D>().GenerateGeometry();
-                //frames[2].GetComponentInChildren<CompositeCollider2D>().GenerateGeometry();
-                //foreach (GameObject grid in grids)
-                //    foreach (TilemapRenderer tilemap in grid.GetComponentsInChildren<TilemapRenderer>())
-                //        tilemap.enabled = true;
                 Rotate(grids[0].transform, 45);
                 Rotate(grids[1].transform, 0);
                 Rotate(grids[2].transform, -45);
