@@ -7,16 +7,22 @@ using UnityEngine;
 public class FrameManager : MonoBehaviour
 {
     public GameObject[] frames;
+    public DimensionScriptable[] dimensions;
     public float size = 3.5f * 3f;
     public float duration = 0.5f;
     public GameObject player;
     public float shake_force = 1;
+    public Material[] player_materials;
     private bool unlocked = true;
     private GameObject new_frame = null;
     private float new_frame_start = 0f;
     private float rotateTo = 0f;
     private float elapsedTime = 0f;
+    private float blink_time = 0f;
     private bool broke = false;
+    private bool blinked;
+    private bool skin_changed = false;
+    private float rotation;
 
     void Start()
     {
@@ -34,38 +40,59 @@ public class FrameManager : MonoBehaviour
                 if (direction > 0)
                 {
                     new_frame = Instantiate(frames[0]);
-                    new_frame.transform.rotation = Quaternion.Euler(-60f, 0f, 0f);
-                    rotateTo = 30f;
-                    new_frame_start = -60f;
+                    new_frame.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
+                    rotateTo = 45f;
+                    new_frame_start = -90f;
                 }
                 else
                 {
                     new_frame = Instantiate(frames[2]);
-                    new_frame.transform.rotation = Quaternion.Euler(60f, 0f, 0f);
-                    rotateTo = -30f;
-                    new_frame_start = 60f;
+                    new_frame.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
+                    rotateTo = -45;
+                    new_frame_start = 90f;
                 }
                 elapsedTime = 0f;
                 player.GetComponent<PlayerController>().Stop();
                 broke = false;
+                blinked = false;
+                rotation = UnityEngine.Random.Range(-25f, 25f);
+                if (rotateTo > 0)
+                {
+                    DimensionScriptable new_dimesion = dimensions[0];
+                    dimensions[0] = dimensions[1];
+                    dimensions[1] = dimensions[2];
+                    dimensions[2] = new_dimesion;
+                }
+                else
+                {
+                    DimensionScriptable new_dimesion = dimensions[2];
+                    dimensions[2] = dimensions[1];
+                    dimensions[1] = dimensions[0];
+                    dimensions[0] = new_dimesion;
+                }
             }
         }
         else 
         {
             float t = elapsedTime / duration;
             t = ((t - 1.35f) * t * (0.3f - 2f * t)) * 1.6806722689f;
-            frames[0].transform.rotation = Quaternion.Euler(30f + t * rotateTo, 0f, 0f);
+            frames[0].transform.rotation = Quaternion.Euler(45f + t * rotateTo, 0f, 0f);
             frames[1].transform.rotation = Quaternion.Euler(t * rotateTo, 0f, 0f);
-            frames[2].transform.rotation = Quaternion.Euler(-30f + t * rotateTo, 0f, 0f);
+            frames[2].transform.rotation = Quaternion.Euler(-45f + t * rotateTo, 0f, 0f);
             new_frame.transform.rotation = Quaternion.Euler(new_frame_start + t * rotateTo, 0f, 0f);
 
             t = elapsedTime / duration;
             t = -3f * t * (t - 1) + 1.5f;
             player.transform.GetChild(0).transform.localScale = new Vector3(t, t, t);
 
+            t = elapsedTime / duration;
+            t = (t - 1) * 4 * t * rotation;
+            player.transform.GetChild(0).transform.localRotation = Quaternion.Euler(0f, 0f, t);
+
             if (!broke)
-                if (frames[1].transform.GetChild(0).GetComponent<BoxCollider2D>().bounds.max.y < 
-                    player.transform.position.y + 0.95 || 
+            {
+                if (frames[1].transform.GetChild(0).GetComponent<BoxCollider2D>().bounds.max.y <
+                    player.transform.position.y + 0.95 ||
                     frames[1].transform.GetChild(0).GetComponent<BoxCollider2D>().bounds.min.y >
                     player.transform.position.y - 1.05)
                 {
@@ -74,7 +101,7 @@ public class FrameManager : MonoBehaviour
                         frames[1].transform.GetChild(1).transform.position = new Vector3(0f, -1f, 0f) + player.transform.position;
                         frames[1].transform.GetChild(1).transform.rotation = Quaternion.Euler(90f, 0f, 0f);
                     }
-                    else 
+                    else
                     {
                         frames[1].transform.GetChild(1).transform.position = new Vector3(0f, .8f, 0f) + player.transform.position;
                         frames[1].transform.GetChild(1).transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
@@ -83,6 +110,24 @@ public class FrameManager : MonoBehaviour
                     this.GetComponent<CinemachineImpulseSource>().GenerateImpulse(shake_force);
                     broke = true;
                 }
+            }
+            if (!blinked && (frames[1].transform.GetChild(0).GetComponent<BoxCollider2D>().bounds.max.y <
+                    player.transform.position.y + 1.45 ||
+                    frames[1].transform.GetChild(0).GetComponent<BoxCollider2D>().bounds.min.y >
+                    player.transform.position.y - 1.55))
+            {
+                blinked = true;
+                player.transform.GetChild(0).GetComponent<SpriteRenderer>().material = player_materials[1];
+                skin_changed = false;
+                player.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = dimensions[1].playerSprite[0];
+                player.GetComponent<PlayerController>().playerSprite = dimensions[1].playerSprite;
+                blink_time = elapsedTime;
+            }
+            else if (!skin_changed && (blink_time + .2f <= elapsedTime))
+            {
+                player.transform.GetChild(0).GetComponent<SpriteRenderer>().material = player_materials[0];
+                skin_changed = true;
+            }
 
             elapsedTime += Time.deltaTime;
 
@@ -103,11 +148,14 @@ public class FrameManager : MonoBehaviour
                     frames[1] = frames[0];
                     frames[0] = new_frame;
                 }
-                frames[0].transform.rotation = Quaternion.Euler(30f, 0f, 0f);
+                frames[0].transform.rotation = Quaternion.Euler(45f, 0f, 0f);
                 frames[1].transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-                frames[2].transform.rotation = Quaternion.Euler(-30f, 0f, 0f);
+                frames[2].transform.rotation = Quaternion.Euler(-45f, 0f, 0f);
                 player.transform.GetChild(0).transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+                player.transform.GetChild(0).transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
                 player.GetComponent<PlayerController>().Resume();
+                player.GetComponent<Rigidbody2D>().gravityScale = dimensions[1].gravity;
+                player.transform.GetChild(0).GetComponent<SpriteRenderer>().material = player_materials[0];
                 unlocked = true;
             }
         }
