@@ -1664,6 +1664,8 @@ MonoBehaviour:
   camController: {fileID: 561457890}
   MusicSlider: {fileID: 916010317}
   SoundSlider: {fileID: 1162044394}
+  menuTheme: {fileID: 8300000, guid: af9b7cf9c894966489d06c18edc2cd60, type: 3}
+  musicPlayer: {fileID: 0}
 --- !u!4 &967712847
 Transform:
   m_ObjectHideFlags: 0
