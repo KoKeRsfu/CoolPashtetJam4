@@ -81,9 +81,6 @@ public class PlayerController : MonoBehaviour
 		
 		public float deathTime;
 		
-		public CinemachineVirtualCamera vcam;
-		public float vcam_angle;
-		
 		public LensDistortion lensdis_value;
 		public PaniniProjection paniniproj_value;
 		public Vignette vignette_value;
@@ -119,16 +116,10 @@ public class PlayerController : MonoBehaviour
 		deathVariables._current = Mathf.MoveTowards(deathVariables._current, deathVariables._target, deathVariables.t * Time.deltaTime);
 		deathVariables._current2 = Mathf.MoveTowards(deathVariables._current2, deathVariables._target2, deathVariables.t2 * Time.deltaTime);
 
-		deathVariables.lensdis_value.intensity.value = (deathVariables._current * 0.15f) + 0.2f;
-		deathVariables.lensdis_value.scale.value = 1f - (deathVariables._current * 0.25f);
-		deathVariables.paniniproj_value.distance.value = (deathVariables._current * 0.7f);
-		deathVariables.vignette_value.intensity.value = (deathVariables._current * 0.3f);
-
-		if (deathVariables.isDying)
-		{
-			// чё это за пиздец разберись
-			//deathVariables.vcam.transform.rotation = Quaternion.EulerAngles(0f,0f, 1f - (deathVariables._current*(1f/deathVariables.vcam_angle)));
-		}
+		deathVariables.lensdis_value.intensity.value = (deathVariables._current * 0.10f) + 0.2f;
+		deathVariables.lensdis_value.scale.value = 1f - (deathVariables._current * 0.15f);
+		deathVariables.paniniproj_value.distance.value = (deathVariables._current * 0.15f);
+		deathVariables.vignette_value.intensity.value = (deathVariables._current * 0.2f);
 
 		if (Input.GetKeyDown(KeyCode.H))
 		{
@@ -270,6 +261,14 @@ public class PlayerController : MonoBehaviour
 		animVariables.prevMin = animVariables.minFrame;
 	}
 	
+	protected void OnCollisionEnter2D(Collision2D collisionInfo) 
+	{
+		if (collisionInfo.gameObject.layer == 7) 
+		{
+			StartCoroutine("Death");
+		}
+	}
+	
 	public void Stop() 
 	{	
 		stopVariables.conservedVelocity = new Vector2(rb.velocity.x * 5f, rb.velocity.y * 1f);
@@ -306,14 +305,6 @@ public class PlayerController : MonoBehaviour
 		
 		Instantiate(deathVariables.bloodParticles, transform.position, deathVariables.bloodParticles.transform.rotation);
 		Instantiate(deathVariables.goreParticles, transform.position, deathVariables.goreParticles.transform.rotation);
-		
-		int r = Random.Range(4,8);
-		for (int i=0;i<r;i++) 
-		{
-			Instantiate(deathVariables.blood[Random.Range(0,deathVariables.blood.Count)],	
-				new Vector3(transform.position.x + Random.Range(-1.2f,1.2f), transform.position.y + Random.Range(-1.6f,1.2f), 0), 
-				Quaternion.Euler(0,0,Random.Range(-45f,45f)));
-		}
 
         GameObject soundPlayer = Instantiate(Resources.Load<GameObject>("Audio/Prefabs/SoundPlayer"));
         soundPlayer.GetComponent<SoundManager>().audioClip = deathVariables.deathClip;

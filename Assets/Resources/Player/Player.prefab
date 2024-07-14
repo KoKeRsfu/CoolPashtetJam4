@@ -357,11 +357,9 @@ MonoBehaviour:
     _target: 0
     _current2: 1
     _target2: 0
-    t: 2
+    t: 3.5
     t2: 0
-    deathTime: 1
-    vcam: {fileID: 0}
-    vcam_angle: 0
+    deathTime: 0.7
     lensdis_value: {fileID: 0}
     paniniproj_value: {fileID: 0}
     vignette_value: {fileID: 0}

@@ -97,5 +97,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fbf93efad1f41b48aa47d63d0a79dfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationTime: 0.5
-  deathWaitTime: 0.5
+  animationTime: 0.4
+  deathWaitTime: 0.3
