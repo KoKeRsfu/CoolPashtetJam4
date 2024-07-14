@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7277213440715248721}
   - component: {fileID: 6269397079599607140}
   - component: {fileID: 6325464601198326654}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: LavaPlatform1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
