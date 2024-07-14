@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Ocean
   m_EditorClassIdentifier: 
   gravity: 15
-  light: 0
+  light: 1
   lightColor: {r: 0, g: 0, b: 0, a: 0}
   air: 0
   friction: 0.88
