@@ -681,7 +681,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   maxSpeed: 7
-  jumpPower: 19
+  jumpPower: 23
   air: 0
   airTime: 5
   airTimeMax: 5
@@ -703,8 +703,6 @@ MonoBehaviour:
   gamefeel:
     coyoteTime: 0
     coyoteTimeMax: 0.2
-    holdTime: 0
-    holdTimeMax: 0.2
   stopVariables:
     stop: 0
     conservedVelocity: {x: 0, y: 0}
