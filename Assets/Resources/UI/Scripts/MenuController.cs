@@ -18,7 +18,7 @@ public class MenuController : MonoBehaviour
     void Start()
     {
 	    ChangeMusicVolume(PlayerPrefs.GetFloat("MusicVolume", 0.5f));
-	    PlayerPrefs.GetFloat("SoundVolume", 0.5f);
+	    ChangeSoundVolume(PlayerPrefs.GetFloat("SoundVolume", 0.5f));
     }
 
     // Update is called once per frame
@@ -40,6 +40,12 @@ public class MenuController : MonoBehaviour
 	{
 		PlayerPrefs.SetFloat("MusicVolume", a);
 		MusicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
+	}
+	
+	public void ChangeSoundVolume(float a) 
+	{
+		PlayerPrefs.SetFloat("SoundVolume", a);
+		SoundSlider.value = PlayerPrefs.GetFloat("SoundVolume");
 	}
 	
 	public void PlayButton()
