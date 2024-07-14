@@ -352,8 +352,9 @@ MonoBehaviour:
     _target: 0
     _current2: 1
     _target2: 0
-    t: 0
+    t: 1
     t2: 0
+    deathTime: 1.5
     vcam: {fileID: 0}
     vcam_angle: 0
     lensdis_value: {fileID: 0}
