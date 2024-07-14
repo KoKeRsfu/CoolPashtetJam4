@@ -681,7 +681,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   maxSpeed: 7
-  jumpPower: 18
+  jumpPower: 19
   air: 0
   airTime: 5
   airTimeMax: 5
