@@ -8,7 +8,7 @@ public class DimensionScriptable : ScriptableObject
 	public float gravity;
 	public float light;
 	public Color lightColor;
-	public float air;
+	public bool air;
 	
 	public float friction;
 	

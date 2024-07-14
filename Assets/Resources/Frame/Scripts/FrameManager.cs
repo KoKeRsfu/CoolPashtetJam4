@@ -57,6 +57,8 @@ public class FrameManager : MonoBehaviour
         player.GetComponent<Rigidbody2D>().gravityScale = dimensions[1].gravity;
         player.GetComponent<PlayerController>().lightLevel = dimensions[1].light;
         player.GetComponent<PlayerController>().playerSprite = dimensions[1].playerSprite;
+        player.GetComponent<PlayerController>().friction = dimensions[1].friction;
+        player.GetComponent<PlayerController>().air = dimensions[1].air;
 
         frames[0].transform.rotation = Quaternion.Euler(45f, 0f, 0f);
         frames[1].transform.rotation = Quaternion.Euler(0f, 0f, 0f);
@@ -193,6 +195,8 @@ public class FrameManager : MonoBehaviour
                     player.GetComponent<PlayerController>().animVariables.calculatedFrame];
                 player.GetComponent<PlayerController>().playerSprite = dimensions[1].playerSprite;
                 player.GetComponent<PlayerController>().lightLevel = dimensions[1].light;
+                player.GetComponent<PlayerController>().friction = dimensions[1].friction;
+                player.GetComponent<PlayerController>().air = dimensions[1].air;
                 blink_time = elapsedTime;
             }
             else if (!skin_changed && (blink_time + .2f <= elapsedTime))

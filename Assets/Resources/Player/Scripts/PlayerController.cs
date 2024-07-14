@@ -17,9 +17,11 @@ public class PlayerController : MonoBehaviour
 	private BoxCollider2D collider;
 	private SpriteRenderer sprite;
 	private Light2D light;
-	
-	public float airTime = 0;
-	public float airTimeMax;
+
+	public bool air;
+	public float airTime = 0f;
+	public float airTimeMax = 5f;
+	public float airRestoreMult = 2f;
 	
 	public float lightLevel;
 	
@@ -113,29 +115,45 @@ public class PlayerController : MonoBehaviour
 
 	void Update()
 	{
-		
+
 		deathVariables._current = Mathf.MoveTowards(deathVariables._current, deathVariables._target, deathVariables.t * Time.deltaTime);
 		deathVariables._current2 = Mathf.MoveTowards(deathVariables._current2, deathVariables._target2, deathVariables.t2 * Time.deltaTime);
-		
+
 		deathVariables.lensdis_value.intensity.value = (deathVariables._current * 0.15f) + 0.2f;
 		deathVariables.lensdis_value.scale.value = 1f - (deathVariables._current * 0.25f);
 		deathVariables.paniniproj_value.distance.value = (deathVariables._current * 0.7f);
 		deathVariables.vignette_value.intensity.value = (deathVariables._current * 0.3f);
-		
-		if (deathVariables.isDying) 
+
+		if (deathVariables.isDying)
 		{
 			// чё это за пиздец разберись
 			//deathVariables.vcam.transform.rotation = Quaternion.EulerAngles(0f,0f, 1f - (deathVariables._current*(1f/deathVariables.vcam_angle)));
 		}
-		
-		if (Input.GetKeyDown(KeyCode.H)) 
+
+		if (Input.GetKeyDown(KeyCode.H))
 		{
 			StartCoroutine("Death");
 		}
-		
+
 		light.intensity = lightLevel;
-		
+
 		if (stopVariables.stop) return;
+
+		if (!deathVariables.isDying)
+		{
+			if (!air)
+			{
+				if (airTime < 0f)
+					StartCoroutine("Death");
+				airTime -= Time.deltaTime;
+			}
+			else
+			{
+				airTime += airRestoreMult * Time.deltaTime;
+				if (airTime > airTimeMax)
+					airTime = airTimeMax;
+			}
+		}
 		
 		if (animVariables.currentFrame < animVariables.maxFrame) animVariables.currentFrame += animVariables.animSpeed * Time.deltaTime;
 		else animVariables.currentFrame = animVariables.minFrame;

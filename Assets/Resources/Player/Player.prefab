@@ -309,8 +309,10 @@ MonoBehaviour:
   speed: 5
   maxSpeed: 7
   jumpPower: 18
+  air: 0
   airTime: 0
-  airTimeMax: 0
+  airTimeMax: 5
+  airRestoreMult: 2
   lightLevel: 0
   friction: 0.88
   playerSprite:
@@ -355,9 +357,9 @@ MonoBehaviour:
     _target: 0
     _current2: 1
     _target2: 0
-    t: 1
+    t: 2
     t2: 0
-    deathTime: 1.5
+    deathTime: 1
     vcam: {fileID: 0}
     vcam_angle: 0
     lensdis_value: {fileID: 0}

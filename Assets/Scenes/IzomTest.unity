@@ -137,6 +137,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5414546295082620413, guid: a7b7ef72eb212c6498bddcd6bbd6c143, type: 3}
+      propertyPath: deathVariables.t
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5414546295082620413, guid: a7b7ef72eb212c6498bddcd6bbd6c143, type: 3}
       propertyPath: deathVariables.blackScreen
       value: 
       objectReference: {fileID: 358804180}

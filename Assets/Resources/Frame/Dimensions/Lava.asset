@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80bbb82ce12c9fb488b36eb42c20e176, type: 3}
+  m_Name: Lava
+  m_EditorClassIdentifier: 
+  gravity: 10
+  light: 0
+  lightColor: {r: 0, g: 0, b: 0, a: 0}
+  air: 1
+  friction: 0.88
+  music: {fileID: 8300000, guid: 8739ccb7bcf042f4e93d6798fd3c21db, type: 3}
+  playerSprite:
+  - {fileID: -374718222, guid: 1c94e3c9ad104594390dd9ec93215e2b, type: 3}
+  - {fileID: -811242995, guid: 1c94e3c9ad104594390dd9ec93215e2b, type: 3}
+  - {fileID: -1659851077, guid: 1c94e3c9ad104594390dd9ec93215e2b, type: 3}
+  - {fileID: -1635293298, guid: 1c94e3c9ad104594390dd9ec93215e2b, type: 3}
+  - {fileID: 1658395314, guid: 1c94e3c9ad104594390dd9ec93215e2b, type: 3}
+  - {fileID: 1391146820, guid: 1c94e3c9ad104594390dd9ec93215e2b, type: 3}
+  - {fileID: 730584559, guid: 1c94e3c9ad104594390dd9ec93215e2b, type: 3}
+  - {fileID: 1987232025, guid: 1c94e3c9ad104594390dd9ec93215e2b, type: 3}
+  - {fileID: 1083705535, guid: 1c94e3c9ad104594390dd9ec93215e2b, type: 3}
+  - {fileID: 305669845, guid: 1c94e3c9ad104594390dd9ec93215e2b, type: 3}
+  - {fileID: -180427910, guid: 1c94e3c9ad104594390dd9ec93215e2b, type: 3}
