@@ -173,3 +173,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   door: {fileID: 0}
   opened: {fileID: 741038660, guid: ec10a057901a5f0439595b2db17f63d0, type: 3}
+  pickupClip: {fileID: 8300000, guid: fae204f391849df498b60f86ae865fb1, type: 3}

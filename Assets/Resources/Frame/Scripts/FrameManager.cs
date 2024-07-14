@@ -1,4 +1,4 @@
-using Cinemachine;
+﻿using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -30,7 +30,9 @@ public class FrameManager : MonoBehaviour
     private bool broke = false;
     private bool blinked;
     private bool skin_changed = false;
-    private float rotation;
+	private float rotation;
+    
+	public AudioClip rollClip;
 
     void Start()
     {
@@ -139,7 +141,10 @@ public class FrameManager : MonoBehaviour
                 player.GetComponent<PlayerController>().Stop();
                 broke = false;
                 blinked = false;
-                rotation = UnityEngine.Random.Range(-25f, 25f);
+	            rotation = UnityEngine.Random.Range(-25f, 25f);
+                
+	            GameObject soundPlayer = Instantiate(Resources.Load<GameObject>("Audio/Prefabs/SoundPlayer"));
+	            soundPlayer.GetComponent<SoundManager>().audioClip = rollClip;
             }
         }
         else 
