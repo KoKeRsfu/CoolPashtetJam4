@@ -114,9 +114,9 @@ public class PlayerController : MonoBehaviour
 		deathVariables._current2 = Mathf.MoveTowards(deathVariables._current2, deathVariables._target2, deathVariables.t2 * Time.deltaTime);
 		
 		deathVariables.lensdis_value.intensity.value = (deathVariables._current * 0.15f) + 0.2f;
-		deathVariables.lensdis_value.scale.value = 1f - (deathVariables._current * 0.4f);
-		deathVariables.paniniproj_value.distance.value = (deathVariables._current * 1);
-		deathVariables.vignette_value.intensity.value = (deathVariables._current * 0.35f);
+		deathVariables.lensdis_value.scale.value = 1f - (deathVariables._current * 0.25f);
+		deathVariables.paniniproj_value.distance.value = (deathVariables._current * 0.7f);
+		deathVariables.vignette_value.intensity.value = (deathVariables._current * 0.3f);
 		
 		if (deathVariables.isDying) 
 		{

@@ -12,5 +12,7 @@ public class DimensionScriptable : ScriptableObject
 	public bool multipleJumps;
 	public bool invertedControls;	
 	
+	public AudioClip music;
+	
 	public Sprite[] playerSprite;
 }
