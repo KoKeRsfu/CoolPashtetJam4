@@ -33,7 +33,11 @@ public class FrameManager : MonoBehaviour
 
     void Start()
     {
-        //musicPlayer = GameObject.FindGameObjectWithTag("musicplayer").GetComponent<MusicPlayer>();
+        try
+        {
+            musicPlayer = GameObject.FindGameObjectWithTag("musicplayer").GetComponent<MusicPlayer>();
+        }
+        catch (Exception e) { }
 
         for (byte i = 0; i < 3; i++)
         {
@@ -45,7 +49,11 @@ public class FrameManager : MonoBehaviour
             frames[i].transform.position = new Vector3(0f, 0f, 18.23283f);
         }
 
-        //musicPlayer.ChangeTrack(dimensions[1].music);
+        try
+        {
+            musicPlayer.ChangeTrack(dimensions[1].music);
+        }
+        catch (Exception e) { }
         player.GetComponent<Rigidbody2D>().gravityScale = dimensions[1].gravity;
         player.GetComponent<PlayerController>().lightLevel = dimensions[1].light;
         player.GetComponent<PlayerController>().playerSprite = dimensions[1].playerSprite;
@@ -166,7 +174,11 @@ public class FrameManager : MonoBehaviour
                     broke = true;
                     GameObject soundPlayer = Instantiate(Resources.Load<GameObject>("Audio/Prefabs/SoundPlayer"));
                     soundPlayer.GetComponent<SoundManager>().audioClip = breakClip;
-                    //musicPlayer.ChangeTrack(dimensions[1].music);
+                    try
+                    {
+                        musicPlayer.ChangeTrack(dimensions[1].music);
+                    }
+                    catch (Exception e) { }
                 }
             }
             if (!blinked && (frames[1].transform.GetChild(0).GetComponent<BoxCollider2D>().bounds.max.y <
