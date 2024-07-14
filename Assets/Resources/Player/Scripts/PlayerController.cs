@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour
 	[System.Serializable]
 	public class DeathVariables
 	{
+		public AudioClip deathClip;
 		public GameObject blackScreen;
 		public GameObject bloodParticles;
 		public GameObject goreParticles;
@@ -300,7 +301,9 @@ public class PlayerController : MonoBehaviour
 				Quaternion.Euler(0,0,Random.Range(-45f,45f)));
 		}
 
-		deathVariables.blackScreen.GetComponent<BlackScreenScript>().StartCoroutine("AwayAnimation");
+        GameObject soundPlayer = Instantiate(Resources.Load<GameObject>("Audio/Prefabs/SoundPlayer"));
+        soundPlayer.GetComponent<SoundManager>().audioClip = deathVariables.deathClip;
+        deathVariables.blackScreen.GetComponent<BlackScreenScript>().StartCoroutine("AwayAnimation");
 		yield return new WaitForSeconds(deathVariables.deathTime);
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}

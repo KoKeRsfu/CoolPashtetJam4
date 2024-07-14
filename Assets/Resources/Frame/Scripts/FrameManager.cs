@@ -9,7 +9,6 @@ using UnityEngine.Tilemaps;
 
 public class FrameManager : MonoBehaviour
 {
-    public MusicPlayer musicPlayer;
     public GameObject[] frames;
     public GameObject[] grids;
     public DimensionScriptable[] dimensions;
@@ -20,6 +19,7 @@ public class FrameManager : MonoBehaviour
     public Material[] player_materials;
     public AudioClip breakClip;
 
+    private MusicPlayer musicPlayer;
     private bool unlocked = true;
     private GameObject new_frame = null;
     private float new_frame_start = 0f;
@@ -33,6 +33,8 @@ public class FrameManager : MonoBehaviour
 
     void Start()
     {
+        //musicPlayer = GameObject.FindGameObjectWithTag("musicplayer").GetComponent<MusicPlayer>();
+
         for (byte i = 0; i < 3; i++)
         {
             GameObject grid = Instantiate(grids[i]);
@@ -43,7 +45,10 @@ public class FrameManager : MonoBehaviour
             frames[i].transform.position = new Vector3(0f, 0f, 18.23283f);
         }
 
-        musicPlayer.ChangeTrack(dimensions[1].music);
+        //musicPlayer.ChangeTrack(dimensions[1].music);
+        player.GetComponent<Rigidbody2D>().gravityScale = dimensions[1].gravity;
+        player.GetComponent<PlayerController>().lightLevel = dimensions[1].light;
+        player.GetComponent<PlayerController>().playerSprite = dimensions[1].playerSprite;
 
         frames[0].transform.rotation = Quaternion.Euler(45f, 0f, 0f);
         frames[1].transform.rotation = Quaternion.Euler(0f, 0f, 0f);
@@ -68,13 +73,8 @@ public class FrameManager : MonoBehaviour
 
     private void Shade(GameObject filter, float angle, float color)
     {
-        //float color;
         if (angle >= 180f)
             angle -= 380f;
-        //if (angle > 0)
-        //    color = 1f;
-        //else
-        //    color = 0f;
         filter.GetComponent<SpriteRenderer>().color = new Color(color, color, color, Mathf.Abs(angle) / 150);
     }
 
@@ -166,7 +166,7 @@ public class FrameManager : MonoBehaviour
                     broke = true;
                     GameObject soundPlayer = Instantiate(Resources.Load<GameObject>("Audio/Prefabs/SoundPlayer"));
                     soundPlayer.GetComponent<SoundManager>().audioClip = breakClip;
-                    musicPlayer.ChangeTrack(dimensions[1].music);
+                    //musicPlayer.ChangeTrack(dimensions[1].music);
                 }
             }
             if (!blinked && (frames[1].transform.GetChild(0).GetComponent<BoxCollider2D>().bounds.max.y <

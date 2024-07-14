@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80bbb82ce12c9fb488b36eb42c20e176, type: 3}
   m_Name: Default
   m_EditorClassIdentifier: 
-  gravity: 7.5
+  gravity: 10
   light: 0
   lightColor: {r: 0, g: 0, b: 0, a: 0}
   air: 1
