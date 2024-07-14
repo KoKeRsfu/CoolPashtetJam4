@@ -190,6 +190,7 @@ public class PlayerController : MonoBehaviour
 		else animVariables.currentFrame = animVariables.minFrame;
 		
 		animVariables.calculatedFrame = Mathf.RoundToInt(animVariables.currentFrame);
+		Debug.Log(animVariables.currentFrame + " " + animVariables.calculatedFrame);
 		sprite.sprite = playerSprite[animVariables.calculatedFrame];
 		
 		if (gamefeel.coyoteTime > 0) gamefeel.coyoteTime -= 1 * Time.deltaTime;
