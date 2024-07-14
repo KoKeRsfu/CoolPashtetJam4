@@ -16,6 +16,7 @@ public class BlackScreenScript : MonoBehaviour
 
     public IEnumerator AmakeAnimation()
     {
+        this.transform.position = new Vector3(0f, 0f, 0f);
         elapsedTime = Time.deltaTime;
         while (elapsedTime < animationTime)
         {
