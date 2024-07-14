@@ -25,6 +25,12 @@ public class LevelDoor : MonoBehaviour
 
     private IEnumerator NextScene()
 	{
+		if (nextLevel != 7) 
+		{
+			string key = "level" + (nextLevel-1);
+			PlayerPrefs.SetInt(key, 1);
+		}
+		
 		GameObject soundPlayer = Instantiate(Resources.Load<GameObject>("Audio/Prefabs/SoundPlayer"));
 		soundPlayer.GetComponent<SoundManager>().audioClip = openClip;
         yield return new WaitForSeconds(blackScreen.GetComponent<BlackScreenScript>().deathWaitTime +

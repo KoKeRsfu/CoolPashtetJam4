@@ -17,6 +17,8 @@ public class MenuController : MonoBehaviour
 	public AudioClip menuTheme;
 	public MusicPlayer musicPlayer;
 	
+	public List<Button> levelButtons = new List<Button>();
+	
     // Start is called before the first frame update
     void Start()
 	{
@@ -27,6 +29,14 @@ public class MenuController : MonoBehaviour
 		ChangeSoundVolume(PlayerPrefs.GetFloat("SoundVolume", 0.5f));
 		
 		musicPlayer.ChangeTrack(menuTheme);
+		
+		for (int i=1; i<5; i++) levelButtons[i].interactable = false;
+		
+		if (PlayerPrefs.GetInt("level2", 0) == 1) levelButtons[1].interactable = true;
+		if (PlayerPrefs.GetInt("level3", 0) == 1) levelButtons[2].interactable = true;
+		if (PlayerPrefs.GetInt("level4", 0) == 1) levelButtons[3].interactable = true;
+		if (PlayerPrefs.GetInt("level5", 0) == 1) levelButtons[4].interactable = true;
+		
     }
 
     // Update is called once per frame
