@@ -105,6 +105,11 @@ public class FrameManager : MonoBehaviour
                 frame.transform.GetChild(0).GetChild(4).transform.localPosition = player.transform.localPosition;
             }
             float direction = Input.GetAxisRaw("Mouse ScrollWheel");
+            if (direction == 0)
+            {
+                direction += (Input.GetKey(KeyCode.DownArrow) ? 1f : 0f) - (Input.GetKey(KeyCode.UpArrow) ? 1f : 0f)
+                    - (Input.GetKey(KeyCode.LeftBracket) ? 1f : 0f) + (Input.GetKey(KeyCode.RightBracket) ? 1f : 0f);
+            }
             if (direction != 0)
             {
                 unlocked = false;
