@@ -9,8 +9,8 @@ public class DimensionScriptable : ScriptableObject
 	public float light;
 	public Color lightColor;
 	public float air;
-	public bool multipleJumps;
-	public bool invertedControls;	
+	
+	public float friction;
 	
 	public AudioClip music;
 	

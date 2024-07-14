@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80bbb82ce12c9fb488b36eb42c20e176, type: 3}
+  m_Name: Ocean
+  m_EditorClassIdentifier: 
+  gravity: 15
+  light: 0
+  lightColor: {r: 0, g: 0, b: 0, a: 0}
+  air: 1
+  friction: 0.88
+  music: {fileID: 8300000, guid: c4ff6cd123534b940986235d19c8f275, type: 3}
+  playerSprite:
+  - {fileID: 1914279577, guid: ea40f8fef18de7f4697e75f940a1774d, type: 3}
+  - {fileID: 956166417, guid: ea40f8fef18de7f4697e75f940a1774d, type: 3}
+  - {fileID: 200342407, guid: ea40f8fef18de7f4697e75f940a1774d, type: 3}
+  - {fileID: 2134560448, guid: ea40f8fef18de7f4697e75f940a1774d, type: 3}
+  - {fileID: -1947747063, guid: ea40f8fef18de7f4697e75f940a1774d, type: 3}
+  - {fileID: -666482072, guid: ea40f8fef18de7f4697e75f940a1774d, type: 3}
+  - {fileID: -82267335, guid: ea40f8fef18de7f4697e75f940a1774d, type: 3}
+  - {fileID: -1398595, guid: ea40f8fef18de7f4697e75f940a1774d, type: 3}
+  - {fileID: 1503977056, guid: ea40f8fef18de7f4697e75f940a1774d, type: 3}
+  - {fileID: -271640285, guid: ea40f8fef18de7f4697e75f940a1774d, type: 3}
+  - {fileID: 293099184, guid: ea40f8fef18de7f4697e75f940a1774d, type: 3}

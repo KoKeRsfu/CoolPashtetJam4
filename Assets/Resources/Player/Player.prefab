@@ -312,6 +312,7 @@ MonoBehaviour:
   airTime: 0
   airTimeMax: 0
   lightLevel: 0
+  friction: 0.88
   playerSprite:
   - {fileID: 963822224, guid: 80f45799dc2d07343b197e9138c03c34, type: 3}
   - {fileID: -1184899163, guid: 80f45799dc2d07343b197e9138c03c34, type: 3}
