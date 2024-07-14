@@ -30,7 +30,7 @@ public class LevelDoor : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 3)
+        if (collision.gameObject.layer == 3 && !collision.gameObject.GetComponent<PlayerController>().stopVariables.stop)
         {
             blackScreen.GetComponent<BlackScreenScript>().deathWaitTime = 0;
             blackScreen.GetComponent<BlackScreenScript>().StartCoroutine("AwayAnimation");

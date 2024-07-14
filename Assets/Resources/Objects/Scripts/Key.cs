@@ -34,7 +34,7 @@ public class Key : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 3)
+        if (collision.gameObject.layer == 3 && !collision.gameObject.GetComponent<PlayerController>().stopVariables.stop)
         {
             door.GetComponent<BoxCollider2D>().enabled = false;
             door.GetComponent<SpriteRenderer>().sprite = opened;
