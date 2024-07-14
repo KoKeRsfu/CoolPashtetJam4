@@ -4,26 +4,29 @@ using UnityEngine;
 
 public class MusicPlayer : MonoBehaviour
 {
-	private AudioSource audiosource;
+	public AudioSource audiosource;
 	
 	public float musicTime;
 	public float musicVolume;
 	
     void Start()
 	{
-		audiosource = this.GetComponent<AudioSource>();
+		DontDestroyOnLoad(this.gameObject);
 		
-	     musicVolume = PlayerPrefs.GetFloat("MusicVolume");
-		audiosource.volume = musicVolume;
-	    
+		audiosource = this.GetComponent<AudioSource>(); 
     }
 	
 	public void ChangeTrack(AudioClip clip) 
 	{
+		musicVolume = PlayerPrefs.GetFloat("MusicVolume");
+		audiosource.volume = musicVolume;
+		
 		musicTime = audiosource.time;
 		
 		audiosource.clip = clip;
 		audiosource.Play();
+		
+		if (musicTime > clip.length) musicTime = 0;
 		audiosource.time = musicTime;
 	}
     
