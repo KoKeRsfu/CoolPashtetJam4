@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,7 +15,9 @@ public class SoundManager : MonoBehaviour
     }
 
     void Start()
-    {
+	{
+		DontDestroyOnLoad(this.gameObject);
+    	
         soundVolume = PlayerPrefs.GetFloat("SoundVolume");
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.clip = audioClip;

@@ -89,6 +89,8 @@ public class PlayerController : MonoBehaviour
 
 	private GameObject[] bubbles = new GameObject[5];
 	
+	public AudioClip changeClip;
+	
 	void Start()
 	{
 		rb = this.GetComponent<Rigidbody2D>();
@@ -343,6 +345,10 @@ public class PlayerController : MonoBehaviour
         soundPlayer.GetComponent<SoundManager>().audioClip = deathVariables.deathClip;
         deathVariables.blackScreen.GetComponent<BlackScreenScript>().StartCoroutine("AwayAnimation");
 		yield return new WaitForSeconds(deathVariables.deathTime);
+		
+		GameObject soundPlayer2 = Instantiate(Resources.Load<GameObject>("Audio/Prefabs/SoundPlayer"));
+		soundPlayer2.GetComponent<SoundManager>().audioClip = changeClip;
+		
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}
 }

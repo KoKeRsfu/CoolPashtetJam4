@@ -1,11 +1,13 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Key : MonoBehaviour
 {
     public GameObject door;
-    public Sprite opened;
+	public Sprite opened;
+    
+	public AudioClip pickupClip;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +38,9 @@ public class Key : MonoBehaviour
     {
         if (collision.gameObject.layer == 3 && !collision.gameObject.GetComponent<PlayerController>().stopVariables.stop)
         {
+	        GameObject soundPlayer = Instantiate(Resources.Load<GameObject>("Audio/Prefabs/SoundPlayer"));
+	        soundPlayer.GetComponent<SoundManager>().audioClip = pickupClip;
+        	
             door.GetComponent<BoxCollider2D>().enabled = false;
             door.GetComponent<SpriteRenderer>().sprite = opened;
             this.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;

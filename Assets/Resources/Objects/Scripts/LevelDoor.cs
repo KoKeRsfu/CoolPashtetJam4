@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,7 +7,9 @@ using static PlayerController;
 public class LevelDoor : MonoBehaviour
 {
     public int nextLevel;
-    public GameObject blackScreen;
+	public GameObject blackScreen;
+    
+	public AudioClip openClip;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +24,9 @@ public class LevelDoor : MonoBehaviour
     }
 
     private IEnumerator NextScene()
-    {
+	{
+		GameObject soundPlayer = Instantiate(Resources.Load<GameObject>("Audio/Prefabs/SoundPlayer"));
+		soundPlayer.GetComponent<SoundManager>().audioClip = openClip;
         yield return new WaitForSeconds(blackScreen.GetComponent<BlackScreenScript>().deathWaitTime +
                 blackScreen.GetComponent<BlackScreenScript>().animationTime);
         SceneManager.LoadScene(nextLevel);

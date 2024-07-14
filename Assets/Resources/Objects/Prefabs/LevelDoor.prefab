@@ -145,3 +145,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextLevel: 0
   blackScreen: {fileID: 0}
+  openClip: {fileID: 8300000, guid: 3b256f6cedb4cee49a630d0d94949984, type: 3}

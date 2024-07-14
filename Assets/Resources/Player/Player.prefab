@@ -734,6 +734,7 @@ MonoBehaviour:
     lensdis_value: {fileID: 0}
     paniniproj_value: {fileID: 0}
     vignette_value: {fileID: 0}
+  changeClip: {fileID: 8300000, guid: a0ccc923d4bbc1a488155e980da8bd29, type: 3}
 --- !u!61 &5068433853156063878
 BoxCollider2D:
   m_ObjectHideFlags: 0
