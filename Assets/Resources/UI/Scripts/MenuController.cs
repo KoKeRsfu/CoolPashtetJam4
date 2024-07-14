@@ -36,13 +36,11 @@ public class MenuController : MonoBehaviour
     }
     
     
-	/*
 	private void ClickSound() 
 	{
-		soundPlayer a = Instantiate(soundPlayer).GetComponent<soundPlayer>();
-		a.track = clickSound;
+		SoundManager a = Instantiate(soundPlayer).GetComponent<SoundManager>();
+		a.audioClip = clickSound;
 	}
-	*/
 	
 	public void ChangeMusicVolume(float a) 
 	{
@@ -60,7 +58,7 @@ public class MenuController : MonoBehaviour
 	public void PlayButton()
 	{
 		SceneManager.LoadScene(1);
-		//ClickSound();
+		ClickSound();
 	}
 	
 	public void MoveButton(int a) 
@@ -77,12 +75,12 @@ public class MenuController : MonoBehaviour
 			camController.Move(100,0);
 			break;
 		}
-		//ClickSound();
+		ClickSound();
 	}
 	
 	public void ExitButton() 
 	{
-		//ClickSound();
+		ClickSound();
 		Application.Quit();
 	}
 }
