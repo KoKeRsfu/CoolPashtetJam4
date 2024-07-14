@@ -42,7 +42,8 @@ public class LevelDoor : MonoBehaviour
     {
         if (collision.gameObject.layer == 3 && !collision.gameObject.GetComponent<PlayerController>().stopVariables.stop)
         {
-            blackScreen.GetComponent<BlackScreenScript>().deathWaitTime = 0;
+            blackScreen.GetComponent<BlackScreenScript>()._target = 1;
+            blackScreen.GetComponent<BlackScreenScript>().StartCoroutine("EffectAnimation");
             blackScreen.GetComponent<BlackScreenScript>().StartCoroutine("AwayAnimation");
             StartCoroutine(NextScene());
         }

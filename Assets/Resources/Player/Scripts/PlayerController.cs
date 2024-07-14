@@ -146,13 +146,13 @@ public class PlayerController : MonoBehaviour
 	void Update()
 	{
 
-		deathVariables._current = Mathf.MoveTowards(deathVariables._current, deathVariables._target, deathVariables.t * Time.deltaTime);
-		deathVariables._current2 = Mathf.MoveTowards(deathVariables._current2, deathVariables._target2, deathVariables.t2 * Time.deltaTime);
+		//deathVariables._current = Mathf.MoveTowards(deathVariables._current, deathVariables._target, deathVariables.t * Time.deltaTime);
+		//deathVariables._current2 = Mathf.MoveTowards(deathVariables._current2, deathVariables._target2, deathVariables.t2 * Time.deltaTime);
 
-		deathVariables.lensdis_value.intensity.value = (deathVariables._current * 0.10f) + 0.2f;
-		deathVariables.lensdis_value.scale.value = 1f - (deathVariables._current * 0.15f);
-		deathVariables.paniniproj_value.distance.value = (deathVariables._current * 0.15f);
-		deathVariables.vignette_value.intensity.value = (deathVariables._current * 0.2f);
+		//deathVariables.lensdis_value.intensity.value = (deathVariables._current * 0.10f) + 0.2f;
+		//deathVariables.lensdis_value.scale.value = 1f - (deathVariables._current * 0.15f);
+		//deathVariables.paniniproj_value.distance.value = (deathVariables._current * 0.15f);
+		//deathVariables.vignette_value.intensity.value = (deathVariables._current * 0.2f);
 
 		if (Input.GetKeyDown(KeyCode.H))
 		{
@@ -328,12 +328,13 @@ public class PlayerController : MonoBehaviour
 	
 	public IEnumerator Death() 
 	{
-		deathVariables._target = 1;
-		deathVariables._target2 = 1;
-		
-		//ГОООООООООООООООЛ
-		
-		deathVariables.isDying = true;
+		//deathVariables._target = 1;
+		//deathVariables._target2 = 1;
+		//deathVariables.blackScreen.GetComponent<BlackScreenScript>()._target = 1;
+
+        //ГОООООООООООООООЛ
+
+        deathVariables.isDying = true;
 		sprite.enabled = false;
 		
 		this.GetComponent<CinemachineImpulseSource>().GenerateImpulseAt(transform.position, new Vector2(Random.Range(-1f,1f), Random.Range(-1f,1f)));
@@ -346,8 +347,8 @@ public class PlayerController : MonoBehaviour
         deathVariables.blackScreen.GetComponent<BlackScreenScript>().StartCoroutine("AwayAnimation");
 		yield return new WaitForSeconds(deathVariables.deathTime);
 		
-		GameObject soundPlayer2 = Instantiate(Resources.Load<GameObject>("Audio/Prefabs/SoundPlayer"));
-		soundPlayer2.GetComponent<SoundManager>().audioClip = changeClip;
+		//GameObject soundPlayer2 = Instantiate(Resources.Load<GameObject>("Audio/Prefabs/SoundPlayer"));
+		//soundPlayer2.GetComponent<SoundManager>().audioClip = changeClip;
 		
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}

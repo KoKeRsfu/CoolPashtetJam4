@@ -99,3 +99,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationTime: 0.4
   deathWaitTime: 0.3
+  lensdis_value: {fileID: 0}
+  paniniproj_value: {fileID: 0}
+  vignette_value: {fileID: 0}
+  _current: 1
+  _target: 0
+  _current2: 1
+  _target2: 0
+  t: 3.5
+  t2: 0
+  changeClip: {fileID: 8300000, guid: a0ccc923d4bbc1a488155e980da8bd29, type: 3}
