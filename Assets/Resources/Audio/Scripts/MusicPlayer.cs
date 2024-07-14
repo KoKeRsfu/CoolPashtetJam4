@@ -1,18 +1,30 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MusicPlayer : MonoBehaviour
 {
-    // Start is called before the first frame update
+	private AudioSource audiosource;
+	
+	public float musicTime;
+	public float musicVolume;
+	
     void Start()
-    {
-        
+	{
+		audiosource = this.GetComponent<AudioSource>();
+		
+	     musicVolume = PlayerPrefs.GetFloat("MusicVolume");
+		audiosource.volume = musicVolume;
+	    
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	
+	public void ChangeTrack(AudioClip clip) 
+	{
+		musicTime = audiosource.time;
+		
+		audiosource.clip = clip;
+		audiosource.Play();
+		audiosource.time = musicTime;
+	}
+    
 }

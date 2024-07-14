@@ -18,6 +18,7 @@ MonoBehaviour:
   air: 1
   multipleJumps: 0
   invertedControls: 0
+  music: {fileID: 8300000, guid: f6832cfe2a580724d9fa30e2cf8001ba, type: 3}
   playerSprite:
   - {fileID: -367611029, guid: 36e567efb7ff2564abbf4b2993f08add, type: 3}
   - {fileID: -147662764, guid: 36e567efb7ff2564abbf4b2993f08add, type: 3}
