@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80bbb82ce12c9fb488b36eb42c20e176, type: 3}
+  m_Name: Snow
+  m_EditorClassIdentifier: 
+  gravity: 10
+  light: 0
+  lightColor: {r: 0, g: 0, b: 0, a: 0}
+  air: 0
+  friction: 0.99
+  music: {fileID: 8300000, guid: af9b7cf9c894966489d06c18edc2cd60, type: 3}
+  playerSprite:
+  - {fileID: 246630931, guid: 2242648ad2702a4418066225102121dd, type: 3}
+  - {fileID: -1167560860, guid: 2242648ad2702a4418066225102121dd, type: 3}
+  - {fileID: -1236017493, guid: 2242648ad2702a4418066225102121dd, type: 3}
+  - {fileID: 926538809, guid: 2242648ad2702a4418066225102121dd, type: 3}
+  - {fileID: -1266392382, guid: 2242648ad2702a4418066225102121dd, type: 3}
+  - {fileID: -468552869, guid: 2242648ad2702a4418066225102121dd, type: 3}
+  - {fileID: 758816400, guid: 2242648ad2702a4418066225102121dd, type: 3}
+  - {fileID: -1295154535, guid: 2242648ad2702a4418066225102121dd, type: 3}
+  - {fileID: -167984103, guid: 2242648ad2702a4418066225102121dd, type: 3}
+  - {fileID: -1769624487, guid: 2242648ad2702a4418066225102121dd, type: 3}
+  - {fileID: -1446547333, guid: 2242648ad2702a4418066225102121dd, type: 3}

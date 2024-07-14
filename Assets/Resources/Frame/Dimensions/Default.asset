@@ -15,9 +15,8 @@ MonoBehaviour:
   gravity: 10
   light: 0
   lightColor: {r: 0, g: 0, b: 0, a: 0}
-  air: 1
-  multipleJumps: 0
-  invertedControls: 0
+  air: 0
+  friction: 0.88
   music: {fileID: 8300000, guid: b5aa0fd4389a2f649bc93ac2f12d2cf8, type: 3}
   playerSprite:
   - {fileID: 963822224, guid: 80f45799dc2d07343b197e9138c03c34, type: 3}

@@ -20,7 +20,7 @@ public class MenuController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
 	{
-				
+
 		musicPlayer = GameObject.FindGameObjectWithTag("musicplayer").GetComponent<MusicPlayer>();
 		
 	    ChangeMusicVolume(PlayerPrefs.GetFloat("MusicVolume", 0.5f));
@@ -71,10 +71,10 @@ public class MenuController : MonoBehaviour
 			camController.Move(0,0);
 			break;
 		case 1:
-			camController.Move(-75,0);
+			camController.Move(-100,0);
 			break;
 		case 2:
-			camController.Move(75,0);
+			camController.Move(100,0);
 			break;
 		}
 		//ClickSound();

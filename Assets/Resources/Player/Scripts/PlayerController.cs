@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
 	
 	public float lightLevel;
 	
+	public float friction;
+	
 	public Sprite[] playerSprite;
 	
 	[System.Serializable]
@@ -193,11 +195,7 @@ public class PlayerController : MonoBehaviour
 			transform.rotation = Quaternion.Euler(0f, 180f, 0f);
 		}
 		
-		
-		if (horizontal == 0)
-		{
-			rb.velocity = new Vector2(rb.velocity.x * 0.88f, rb.velocity.y);
-		}
+		rb.velocity = new Vector2(rb.velocity.x * friction, rb.velocity.y);
 		
 		if (gamefeel.coyoteTime <= 0) 
 		{
@@ -214,9 +212,7 @@ public class PlayerController : MonoBehaviour
 			{
 				ChangeAnimationState(1);
 			}
-		}
-		
-		rb.velocity = new Vector2(rb.velocity.x * 0.88f, rb.velocity.y);
+		}		
 
 		if (rb.velocity.x > maxSpeed)
 		{
