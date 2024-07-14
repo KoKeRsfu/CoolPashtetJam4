@@ -10214,9 +10214,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 18032a924119891479757ac7d297c920, type: 3}
     - target: {fileID: 5716437408371592641, guid: 90df80c25879e44478389b936e282d1e, type: 3}
+      propertyPath: shadeColor
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5716437408371592641, guid: 90df80c25879e44478389b936e282d1e, type: 3}
       propertyPath: musicPlayer
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5716437408371592641, guid: 90df80c25879e44478389b936e282d1e, type: 3}
+      propertyPath: dimensions.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 9726bffa69fc5e141bfb13f157b59224, type: 2}
     - target: {fileID: 6785636275870409572, guid: 90df80c25879e44478389b936e282d1e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
