@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour
 	[System.Serializable]
 	public class DeathVariables
 	{
+		public GameObject blackScreen;
 		public GameObject bloodParticles;
 		public GameObject goreParticles;
 		public bool isDying = false;
@@ -298,7 +299,8 @@ public class PlayerController : MonoBehaviour
 				new Vector3(transform.position.x + Random.Range(-1.2f,1.2f), transform.position.y + Random.Range(-1.6f,1.2f), 0), 
 				Quaternion.Euler(0,0,Random.Range(-45f,45f)));
 		}
-		
+
+		deathVariables.blackScreen.GetComponent<BlackScreenScript>().StartCoroutine("AwayAnimation");
 		yield return new WaitForSeconds(deathVariables.deathTime);
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}

@@ -6,6 +6,7 @@ public class SoundManager : MonoBehaviour
 {
     public AudioClip audioClip;
     private AudioSource audioSource;
+    private float soundVolume;
 
     private void DestroySelf()
     {
@@ -15,9 +16,11 @@ public class SoundManager : MonoBehaviour
 
     void Start()
     {
+        soundVolume = PlayerPrefs.GetFloat("SoundVolume");
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.clip = audioClip;
         audioSource.pitch = Random.Range(.9f, 1.1f);
+        audioSource.volume = soundVolume;
         audioSource.Play();
         Invoke("DestroySelf", audioClip.length + .5f);
     }
