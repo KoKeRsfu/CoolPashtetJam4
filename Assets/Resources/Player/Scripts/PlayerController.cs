@@ -308,7 +308,7 @@ public class PlayerController : MonoBehaviour
 	{
 		if (collisionInfo.gameObject.layer == 7) 
 		{
-			StartCoroutine("Death");
+			if (!deathVariables.isDying) StartCoroutine("Death");
 		}
 	}
 	
