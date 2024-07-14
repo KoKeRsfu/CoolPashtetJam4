@@ -138,7 +138,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5414546295082620413, guid: a7b7ef72eb212c6498bddcd6bbd6c143, type: 3}
       propertyPath: deathVariables.t
-      value: 1
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5414546295082620413, guid: a7b7ef72eb212c6498bddcd6bbd6c143, type: 3}
+      propertyPath: deathVariables.deathTime
+      value: 0.85
       objectReference: {fileID: 0}
     - target: {fileID: 5414546295082620413, guid: a7b7ef72eb212c6498bddcd6bbd6c143, type: 3}
       propertyPath: deathVariables.blackScreen
@@ -1026,7 +1030,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6631191313038477339, guid: 994b52397569b3647b57e3734505347f, type: 3}
       propertyPath: deathWaitTime
-      value: 0.5
+      value: 0.45
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
