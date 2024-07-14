@@ -8,7 +8,7 @@ public class SplashManager : MonoBehaviour
 
 	protected void Start() 
 	{
-		Invoke("ChangeScene", 3f);
+		Invoke("ChangeScene", 5f);
 	}
 	
 	private void ChangeScene()
