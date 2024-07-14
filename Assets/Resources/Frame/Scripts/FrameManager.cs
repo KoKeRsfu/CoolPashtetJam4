@@ -9,6 +9,7 @@ using UnityEngine.Tilemaps;
 
 public class FrameManager : MonoBehaviour
 {
+    public MusicPlayer musicPlayer;
     public GameObject[] frames;
     public GameObject[] grids;
     public DimensionScriptable[] dimensions;
@@ -41,6 +42,8 @@ public class FrameManager : MonoBehaviour
             grid.transform.localPosition = new Vector3(0f, 0f, -16.89949f);
             frames[i].transform.position = new Vector3(0f, 0f, 18.23283f);
         }
+
+        musicPlayer.ChangeTrack(dimensions[1].music);
 
         frames[0].transform.rotation = Quaternion.Euler(45f, 0f, 0f);
         frames[1].transform.rotation = Quaternion.Euler(0f, 0f, 0f);
@@ -163,6 +166,7 @@ public class FrameManager : MonoBehaviour
                     broke = true;
                     GameObject soundPlayer = Instantiate(Resources.Load<GameObject>("Audio/Prefabs/SoundPlayer"));
                     soundPlayer.GetComponent<SoundManager>().audioClip = breakClip;
+                    musicPlayer.ChangeTrack(dimensions[1].music);
                 }
             }
             if (!blinked && (frames[1].transform.GetChild(0).GetComponent<BoxCollider2D>().bounds.max.y <
