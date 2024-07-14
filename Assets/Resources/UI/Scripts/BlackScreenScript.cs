@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static PlayerController;
 
 public class BlackScreenScript : MonoBehaviour
 {
     public float animationTime;
+    public float deathWaitTime;
 
     private int position = 0;
     private const int minPosition = 0;
@@ -12,7 +14,7 @@ public class BlackScreenScript : MonoBehaviour
 
     private float elapsedTime = 0f;
 
-    private IEnumerator AmakeAnimation()
+    public IEnumerator AmakeAnimation()
     {
         elapsedTime = Time.deltaTime;
         while (elapsedTime < animationTime)
@@ -25,8 +27,9 @@ public class BlackScreenScript : MonoBehaviour
         this.transform.position = new Vector3((float)position / 8f, 0f, 0f);
     }
 
-    private IEnumerator AwayAnimation()
+    public IEnumerator AwayAnimation()
     {
+        yield return new WaitForSeconds(deathWaitTime);
         this.transform.position = new Vector3((float)position / -8f, 0f, 0f);
         elapsedTime = Time.deltaTime;
         while (elapsedTime < animationTime)
