@@ -78,6 +78,11 @@ public class MenuController : MonoBehaviour
 		ClickSound();
 	}
 	
+	public void LevelButton(int a) 
+	{
+		SceneManager.LoadScene(a);
+	}
+	
 	public void ExitButton() 
 	{
 		ClickSound();
