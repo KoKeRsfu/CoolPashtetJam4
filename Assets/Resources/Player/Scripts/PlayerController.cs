@@ -1,8 +1,9 @@
-﻿	using System.Collections;
+﻿		using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.Rendering;
 using Cinemachine;
 
 public class PlayerController : MonoBehaviour
@@ -68,6 +69,18 @@ public class PlayerController : MonoBehaviour
 		public bool isDying = false;
 		
 		public List<GameObject> blood = new List<GameObject>();
+	
+		public float _current = 0, _target = 0, _current2 = 0, _target2 = 0;
+		public float t, t2;
+		
+		public float deathTime;
+		
+		public CinemachineVirtualCamera vcam;
+		public float vcam_angle;
+		
+		public LensDistortion lensdis_value;
+		public PaniniProjection paniniproj_value;
+		public Vignette vignette_value;
 	}
 	
 	public DeathVariables deathVariables;
@@ -80,10 +93,37 @@ public class PlayerController : MonoBehaviour
 		collider = this.GetComponent<BoxCollider2D>();
 		sprite = this.transform.GetChild(0).GetComponent<SpriteRenderer>();
 		light = this.transform.GetChild(1).GetComponent<Light2D>();
+		
+		VolumeProfile volume = Camera.main.GetComponent<Volume>().profile;
+		
+		LensDistortion lensdis;
+		ChromaticAberration chromab;
+		FilmGrain filmgr;
+		PaniniProjection paniniproj;
+		Vignette vignette;
+		LiftGammaGain lgg;
+		if (volume.TryGet<LensDistortion>(out lensdis)) deathVariables.lensdis_value = lensdis;
+		if (volume.TryGet<PaniniProjection>(out paniniproj)) deathVariables.paniniproj_value = paniniproj;
+		if (volume.TryGet<Vignette>(out vignette)) deathVariables.vignette_value = vignette;
 	}
 
 	void Update()
 	{
+		
+		deathVariables._current = Mathf.MoveTowards(deathVariables._current, deathVariables._target, deathVariables.t * Time.deltaTime);
+		deathVariables._current2 = Mathf.MoveTowards(deathVariables._current2, deathVariables._target2, deathVariables.t2 * Time.deltaTime);
+		
+		deathVariables.lensdis_value.intensity.value = (deathVariables._current * 0.15f) + 0.2f;
+		deathVariables.lensdis_value.scale.value = 1f - (deathVariables._current * 0.4f);
+		deathVariables.paniniproj_value.distance.value = (deathVariables._current * 1);
+		deathVariables.vignette_value.intensity.value = (deathVariables._current * 0.35f);
+		
+		if (deathVariables.isDying) 
+		{
+			// чё это за пиздец разберись
+			//deathVariables.vcam.transform.rotation = Quaternion.EulerAngles(0f,0f, 1f - (deathVariables._current*(1f/deathVariables.vcam_angle)));
+		}
+		
 		if (Input.GetKeyDown(KeyCode.H)) 
 		{
 			StartCoroutine("Death");
@@ -238,6 +278,11 @@ public class PlayerController : MonoBehaviour
 	
 	public IEnumerator Death() 
 	{
+		deathVariables._target = 1;
+		deathVariables._target2 = 1;
+		
+		//ГОООООООООООООООЛ
+		
 		deathVariables.isDying = true;
 		sprite.enabled = false;
 		
@@ -254,7 +299,7 @@ public class PlayerController : MonoBehaviour
 				Quaternion.Euler(0,0,Random.Range(-45f,45f)));
 		}
 		
-		yield return new WaitForSeconds(3f);
+		yield return new WaitForSeconds(deathVariables.deathTime);
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}
 }

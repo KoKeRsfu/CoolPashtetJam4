@@ -348,6 +348,17 @@ MonoBehaviour:
     - {fileID: 1476154462962658540, guid: b3f27c05ba6f0a340be4d9f7b3b6dd13, type: 3}
     - {fileID: 1605081039790807706, guid: 80067ff670e322640b62805a672ff791, type: 3}
     - {fileID: 316660175726126199, guid: 6739463ccbc420d449014622c21c4614, type: 3}
+    _current: 1
+    _target: 0
+    _current2: 1
+    _target2: 0
+    t: 0
+    t2: 0
+    vcam: {fileID: 0}
+    vcam_angle: 0
+    lensdis_value: {fileID: 0}
+    paniniproj_value: {fileID: 0}
+    vignette_value: {fileID: 0}
 --- !u!61 &5068433853156063878
 BoxCollider2D:
   m_ObjectHideFlags: 0

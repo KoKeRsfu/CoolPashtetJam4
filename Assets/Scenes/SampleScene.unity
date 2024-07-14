@@ -1666,7 +1666,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 5}
 --- !u!114 &519420033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4790,12 +4790,28 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 5414546295082620413, guid: a7b7ef72eb212c6498bddcd6bbd6c143, type: 3}
+      propertyPath: deathVariables.t
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5414546295082620413, guid: a7b7ef72eb212c6498bddcd6bbd6c143, type: 3}
+      propertyPath: deathVariables.t2
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 5414546295082620413, guid: a7b7ef72eb212c6498bddcd6bbd6c143, type: 3}
+      propertyPath: deathVariables.vcam
+      value: 
+      objectReference: {fileID: 2104784089}
+    - target: {fileID: 5414546295082620413, guid: a7b7ef72eb212c6498bddcd6bbd6c143, type: 3}
       propertyPath: gamefeel.coyoteTimeMax
       value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 5414546295082620413, guid: a7b7ef72eb212c6498bddcd6bbd6c143, type: 3}
       propertyPath: animVariables.animSpeed
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5414546295082620413, guid: a7b7ef72eb212c6498bddcd6bbd6c143, type: 3}
+      propertyPath: deathVariables.deathTime
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 6421190889855442181, guid: a7b7ef72eb212c6498bddcd6bbd6c143, type: 3}
       propertyPath: m_LocalPosition.x
