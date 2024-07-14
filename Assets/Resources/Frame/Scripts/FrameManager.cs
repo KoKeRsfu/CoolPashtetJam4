@@ -43,8 +43,13 @@ public class FrameManager : MonoBehaviour
         for (byte i = 0; i < 3; i++)
         {
             GameObject grid = Instantiate(grids[i]);
-            grids[i].GetComponentInChildren<TilemapRenderer>().enabled = false;
-            grid.GetComponentInChildren<TilemapCollider2D>().enabled = false;
+            for (int j = 0; j < grids[i].transform.childCount; j++)
+            {
+                grids[i].transform.GetChild(j).GetComponent<TilemapRenderer>().enabled = false;
+                TilemapCollider2D component;
+                if (grid.transform.GetChild(j).TryGetComponent<TilemapCollider2D>(out component))
+                    component.enabled = false;
+            }
             grid.transform.SetParent(frames[i].transform);
             grid.transform.localPosition = new Vector3(0f, 0f, -16.89949f);
             frames[i].transform.position = new Vector3(0f, 0f, 18.23283f);
