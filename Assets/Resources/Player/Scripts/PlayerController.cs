@@ -34,9 +34,6 @@ public class PlayerController : MonoBehaviour
 	{
 		public float coyoteTime = 0;
 		public float coyoteTimeMax;
-	
-		public float holdTime = 0;
-		public float holdTimeMax;
 	}
 	
 	public GamefeelMechanics gamefeel;
@@ -212,7 +209,6 @@ public class PlayerController : MonoBehaviour
 		if (hit.collider != null) 
 		{
 			gamefeel.coyoteTime = gamefeel.coyoteTimeMax;
-			gamefeel.holdTime = gamefeel.holdTimeMax;
 		}
 		
 		if (Input.GetKey(KeyCode.W))
@@ -223,13 +219,6 @@ public class PlayerController : MonoBehaviour
 				rb.velocity = new Vector2(rb.velocity.x, 0);
 				rb.AddForce(new Vector2(horizontal, jumpPower), ForceMode2D.Impulse);
 			}		
-			
-			if (gamefeel.holdTime > 0)
-			{
-				gamefeel.holdTime -= 1 * Time.deltaTime;	
-				
-				rb.AddForce(new Vector2(horizontal, jumpPower * 0.7f), ForceMode2D.Force);
-			}
 		}
 	}
 
