@@ -25,13 +25,13 @@ public class BlackScreenScript : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        this.transform.position = new Vector3((float)position / 8f, 0f, 0f);
+        this.transform.position = new Vector3((float)maxPosition / 8f, 0f, 0f);
     }
 
     public IEnumerator AwayAnimation()
     {
         yield return new WaitForSeconds(deathWaitTime);
-        this.transform.position = new Vector3((float)position / -8f, 0f, 0f);
+        this.transform.position = new Vector3((float)maxPosition / -8f, 0f, 0f);
         elapsedTime = Time.deltaTime;
         while (elapsedTime < animationTime)
         {

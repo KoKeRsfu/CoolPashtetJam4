@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80bbb82ce12c9fb488b36eb42c20e176, type: 3}
+  m_Name: Cave
+  m_EditorClassIdentifier: 
+  gravity: 10
+  light: 1
+  lightColor: {r: 0, g: 0, b: 0, a: 0}
+  air: 0
+  friction: 0.88
+  music: {fileID: 8300000, guid: 4a02c0e17c5a6884e8c128da94436bd2, type: 3}
+  playerSprite:
+  - {fileID: -460100589, guid: cc19b9bdd540add46b967540ccc8e8db, type: 3}
+  - {fileID: -2102509454, guid: cc19b9bdd540add46b967540ccc8e8db, type: 3}
+  - {fileID: -2044205542, guid: cc19b9bdd540add46b967540ccc8e8db, type: 3}
+  - {fileID: 1083769645, guid: cc19b9bdd540add46b967540ccc8e8db, type: 3}
+  - {fileID: -23867673, guid: cc19b9bdd540add46b967540ccc8e8db, type: 3}
+  - {fileID: -848471436, guid: cc19b9bdd540add46b967540ccc8e8db, type: 3}
+  - {fileID: -1784480740, guid: cc19b9bdd540add46b967540ccc8e8db, type: 3}
+  - {fileID: 311579818, guid: cc19b9bdd540add46b967540ccc8e8db, type: 3}
+  - {fileID: 631410896, guid: cc19b9bdd540add46b967540ccc8e8db, type: 3}
+  - {fileID: 565080620, guid: cc19b9bdd540add46b967540ccc8e8db, type: 3}
+  - {fileID: 962075528, guid: cc19b9bdd540add46b967540ccc8e8db, type: 3}

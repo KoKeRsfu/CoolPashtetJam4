@@ -18,6 +18,7 @@ public class FrameManager : MonoBehaviour
     public float shake_force = 1;
     public Material[] player_materials;
     public AudioClip breakClip;
+    public float shadeColor = 1f;
 
     private MusicPlayer musicPlayer;
     private bool unlocked = true;
@@ -69,7 +70,7 @@ public class FrameManager : MonoBehaviour
         foreach(GameObject frame in frames)
             Shade(frame.transform.GetChild(0).GetChild(1).gameObject, frame.transform.rotation.eulerAngles.x, 0f);
         foreach (GameObject frame in frames)
-            Shade(frame.transform.GetChild(0).GetChild(4).gameObject, frame.transform.rotation.eulerAngles.x, 1f);
+            Shade(frame.transform.GetChild(0).GetChild(4).gameObject, frame.transform.rotation.eulerAngles.x, shadeColor);
     }
 
     private void Rotate(Transform grid, float angle)
@@ -238,7 +239,7 @@ public class FrameManager : MonoBehaviour
                 foreach (GameObject frame in frames)
                     Shade(frame.transform.GetChild(0).GetChild(1).gameObject, frame.transform.rotation.eulerAngles.x, 0f);
                 foreach (GameObject frame in frames)
-                    Shade(frame.transform.GetChild(0).GetChild(4).gameObject, frame.transform.rotation.eulerAngles.x, 1f);
+                    Shade(frame.transform.GetChild(0).GetChild(4).gameObject, frame.transform.rotation.eulerAngles.x, shadeColor);
                 Rotate(grids[0].transform, 45);
                 Rotate(grids[1].transform, 0);
                 Rotate(grids[2].transform, -45);
