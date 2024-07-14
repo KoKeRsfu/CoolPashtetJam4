@@ -89,6 +89,8 @@ public class PlayerController : MonoBehaviour
 	public DeathVariables deathVariables;
 	
 	private RaycastHit2D hit;
+
+	private GameObject[] bubbles = new GameObject[5];
 	
 	void Start()
 	{
@@ -108,7 +110,39 @@ public class PlayerController : MonoBehaviour
 		if (volume.TryGet<LensDistortion>(out lensdis)) deathVariables.lensdis_value = lensdis;
 		if (volume.TryGet<PaniniProjection>(out paniniproj)) deathVariables.paniniproj_value = paniniproj;
 		if (volume.TryGet<Vignette>(out vignette)) deathVariables.vignette_value = vignette;
-	}
+
+		for (byte i = 0; i < 5; i++)
+			bubbles[i] = transform.GetChild(3).GetChild(i).gameObject;
+
+        HideBubbles();
+    }
+
+	private void UpdateBubbles()
+	{
+		for (byte i = 0; i < 5; i++)
+			if (airTime > i + 1)
+			{
+                bubbles[i].transform.localScale = new Vector3(1f, 1f, 1f);
+                bubbles[i].GetComponent<SpriteRenderer>().enabled = true;
+                bubbles[i].GetComponent<SpriteRenderer>().color = new Color(.75f, .85f, 1f, .3f);
+            }
+			else if (airTime > i)
+			{
+                bubbles[i].GetComponent<SpriteRenderer>().enabled = true;
+                bubbles[i].transform.localScale = new Vector3(airTime - (float)i, airTime - (float)i, airTime - (float)i);
+                bubbles[i].GetComponent<SpriteRenderer>().color = new Color(.75f, .85f, 1f, (airTime - (float)i) * .3f);
+            }
+			else
+			{
+				bubbles[i].GetComponent<SpriteRenderer>().enabled = false;
+            }
+    }
+
+	private void HideBubbles()
+	{
+        for (byte i = 0; i < 5; i++)
+            bubbles[i].GetComponent<SpriteRenderer>().enabled = false;
+    }
 
 	void Update()
 	{
@@ -137,12 +171,18 @@ public class PlayerController : MonoBehaviour
 				if (airTime < 0f)
 					StartCoroutine("Death");
 				airTime -= Time.deltaTime;
+				UpdateBubbles();
 			}
-			else
+			else if (airTime < airTimeMax)
 			{
 				airTime += airRestoreMult * Time.deltaTime;
 				if (airTime > airTimeMax)
+				{
 					airTime = airTimeMax;
+					HideBubbles();
+				}
+				else
+					UpdateBubbles();
 			}
 		}
 		
@@ -198,11 +238,13 @@ public class PlayerController : MonoBehaviour
 		if (horizontal > 0) 
 		{
 			transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-		}
+            transform.GetChild(3).localRotation = Quaternion.Euler(0f, 0f, 0f);
+        }
 		if (horizontal < 0) 
 		{
 			transform.rotation = Quaternion.Euler(0f, 180f, 0f);
-		}
+            transform.GetChild(3).localRotation = Quaternion.Euler(0f, -180f, 0f);
+        }
 		
 		rb.velocity = new Vector2(rb.velocity.x * friction, rb.velocity.y);
 		
