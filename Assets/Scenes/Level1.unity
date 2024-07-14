@@ -8762,6 +8762,10 @@ PrefabInstance:
       value: LevelDoor
       objectReference: {fileID: 0}
     - target: {fileID: 7672960870108659794, guid: 27ccd32501215f448b1c20894136be1f, type: 3}
+      propertyPath: nextLevel
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672960870108659794, guid: 27ccd32501215f448b1c20894136be1f, type: 3}
       propertyPath: blackScreen
       value: 
       objectReference: {fileID: 358804180}
@@ -9079,7 +9083,7 @@ Transform:
   m_GameObject: {fileID: 1524062967}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.763668, y: -0.049160004, z: -10}
+  m_LocalPosition: {x: -0.076322556, y: -0.117189884, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
