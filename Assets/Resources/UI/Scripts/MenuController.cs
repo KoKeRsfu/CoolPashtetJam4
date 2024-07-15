@@ -16,6 +16,7 @@ public class MenuController : MonoBehaviour
 	
 	public AudioClip menuTheme;
 	public MusicPlayer musicPlayer;
+	public GameObject blackScreen;
 	
 	public List<Button> levelButtons = new List<Button>();
 	
@@ -87,11 +88,19 @@ public class MenuController : MonoBehaviour
 		}
 		ClickSound();
 	}
-	
-	public void LevelButton(int a) 
+
+    private IEnumerator NextScene(int a)
+    {
+        blackScreen.GetComponent<BlackScreenScript>().StartCoroutine("AwayAnimation");
+        yield return new WaitForSeconds(blackScreen.GetComponent<BlackScreenScript>().deathWaitTime +
+                blackScreen.GetComponent<BlackScreenScript>().animationTime);
+        SceneManager.LoadScene(a);
+    }
+
+    public void LevelButton(int a) 
 	{
-		SceneManager.LoadScene(a);
-	}
+        StartCoroutine(NextScene(a));
+    }
 	
 	public void ExitButton() 
 	{

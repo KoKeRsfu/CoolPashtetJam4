@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class ToMenuButton : MonoBehaviour
 {
+    public GameObject blackScreen;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,9 +18,17 @@ public class ToMenuButton : MonoBehaviour
     {
         
     }
-    
-	public void MoveToMenu()
-	{
-		SceneManager.LoadScene(1);
-	}
+
+    private IEnumerator NextScene(int a)
+    {
+        blackScreen.GetComponent<BlackScreenScript>().StartCoroutine("AwayAnimation");
+        yield return new WaitForSeconds(blackScreen.GetComponent<BlackScreenScript>().deathWaitTime +
+                blackScreen.GetComponent<BlackScreenScript>().animationTime);
+        SceneManager.LoadScene(a);
+    }
+
+    private void MoveToMenu()
+    {
+        StartCoroutine(NextScene(1));
+    }
 }

@@ -11,17 +11,28 @@ public class SplashManager : MonoBehaviour
 	
 	[SerializeField] TextMeshProUGUI text;
 
-	protected void Start() 
+	public GameObject blackScreen;
+
+
+    protected void Start() 
 	{
 		string newtext = "Мудрость разработчиков:\n" + splashes[Random.Range(0, splashes.Count)];
 		newtext.Replace("\\n", "\n");
 		text.text = newtext;
 		Invoke("ChangeScene", 5f);
 	}
-	
-	private void ChangeScene()
+
+    private IEnumerator NextScene(int a)
+    {
+        blackScreen.GetComponent<BlackScreenScript>().StartCoroutine("AwayAnimation");
+        yield return new WaitForSeconds(blackScreen.GetComponent<BlackScreenScript>().deathWaitTime +
+                blackScreen.GetComponent<BlackScreenScript>().animationTime);
+        SceneManager.LoadScene(a);
+    }
+
+    private void ChangeScene()
 	{
-		SceneManager.LoadScene(1);
-	}
+        StartCoroutine(NextScene(1));
+    }
 
 }
