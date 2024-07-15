@@ -25,6 +25,8 @@ public class BlackScreenScript : MonoBehaviour
 
     private float elapsedTime = 0f;
 
+    private Camera camera;
+
     public IEnumerator AmakeAnimation()
     {
         this.transform.position = new Vector3(0f, 0f, 0f);
@@ -36,7 +38,7 @@ public class BlackScreenScript : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        this.transform.position = new Vector3((float)maxPosition / 8f, 0f, 0f);
+        this.transform.position = new Vector3(290f, 0f, 0f);
     }
 
     public IEnumerator AwayAnimation()
@@ -44,17 +46,18 @@ public class BlackScreenScript : MonoBehaviour
         _target = 1;
         yield return new WaitForSeconds(deathWaitTime);
         GameObject soundPlayer2 = Instantiate(Resources.Load<GameObject>("Audio/Prefabs/SoundPlayer"));
+        float offset = camera.transform.position.x;
         soundPlayer2.GetComponent<SoundManager>().audioClip = changeClip;
-        this.transform.position = new Vector3((float)maxPosition / -8f, 0f, 0f);
+        this.transform.position = new Vector3((float)maxPosition / -8f + offset, 0f, 0f);
         elapsedTime = Time.deltaTime;
         while (elapsedTime < animationTime)
         {
             position = (int)(elapsedTime / animationTime * maxPosition);
-            this.transform.position = new Vector3(-80f + (float)position / 8f, 0f, 0f);
+            this.transform.position = new Vector3(-80f + (float)position / 8f + offset, 0f, 0f);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        this.transform.position = new Vector3(0f, 0f, 0f);
+        this.transform.position = new Vector3(0f + offset, 0f, 0f);
     }
 
     void Start()
@@ -70,6 +73,7 @@ public class BlackScreenScript : MonoBehaviour
         if (volume.TryGet<LensDistortion>(out lensdis)) lensdis_value = lensdis;
         if (volume.TryGet<PaniniProjection>(out paniniproj)) paniniproj_value = paniniproj;
         if (volume.TryGet<Vignette>(out vignette)) vignette_value = vignette;
+        camera = Camera.main;
     }
     private void Awake()
     {
